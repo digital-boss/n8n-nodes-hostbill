@@ -211,14 +211,17 @@ resources:
               - Paid
               - Unpaid
               - Cancelled
+
       delete:
         spec: https://api.hostbillapp.com/invoices/deleteInvoice/
         params:
           - Invoice.id
+
       get:
         spec: https://api.hostbillapp.com/invoices/getInvoiceDetails/
         params:
           - Invoice.id
+
       getAll:
         spec: https://api.hostbillapp.com/invoices/getInvoices/
         params:
@@ -325,10 +328,12 @@ resources:
         spec: http://api.hostbillapp.com/orders/deleteOrder/
         params:
           - Order.id
+
       get:
         spec: http://api.hostbillapp.com/orders/getOrderDetails/
         params:
           - Order.id
+
       getAll:
         spec: http://api.hostbillapp.com/orders/getOrders/
         params:
@@ -342,10 +347,12 @@ resources:
               - pending
               - fraud
               - cancelled
+
       setStatus:
         spec: http://api.hostbillapp.com/orders/setOrderStatus/
         params:
           - Order.id
+
       setActive:
         spec: http://api.hostbillapp.com/orders/setOrderActive/
         params:
@@ -357,14 +364,17 @@ resources:
         spec: http://api.hostbillapp.com/accounts/accountCreate/
         params:
           - Account.id
+
       delete:
         spec: http://api.hostbillapp.com/accounts/accountTerminate/
         params:
           - Account.id
+
       get:
         spec: http://api.hostbillapp.com/accounts/getAccountDetails/
         params:
           - Account.id
+
       getAll:
         spec: http://api.hostbillapp.com/accounts/getAccounts/
         params:
@@ -387,6 +397,7 @@ resources:
                 value: all_fraud
               - name: Cancelled
                 value: all_cancelled
+
       update:
         spec: http://api.hostbillapp.com/accounts/editAccountDetails/
         params:
@@ -395,19 +406,20 @@ resources:
             display: Optional Fields
             type: options
             options:
-              - $ref: "#/Account/product_id"
-              - $ref: "#/Account/date_created"
-              - $ref: "#/Account/domain"
-              - $ref: "#/Account/server_id"
-              - $ref: "#/Account/payment_module"
-              - $ref: "#/Account/firstpayment"
-              - $ref: "#/Account/total"
-              - $ref: "#/Account/next_due"
-              - $ref: "#/Account/status"
-              - $ref: "#/Account/username"
-              - $ref: "#/Account/password"
-              - $ref: "#/Account/rootpassword"
-              - $ref: "#/Account/notes"
+              - Account.product_id
+              - Account.date_created
+              - Account.domain
+              - Account.server_id
+              - Account.payment_module
+              - Account.firstpayment
+              - Account.total
+              - Account.next_due
+              - Account.status
+              - Account.username
+              - Account.password
+              - Account.rootpassword
+              - Account.notes
+
       addAddon:
         spec: https://api.hostbillapp.com/accounts/addAddonToAccount/
         params:
@@ -440,6 +452,7 @@ resources:
           - name: id
             display: Product ID
             type: number
+
       getProducts:
         spec: http://api.hostbillapp.com/services/getProducts/
         params:
@@ -452,27 +465,27 @@ resources:
       register:
         spec: http://api.hostbillapp.com/domains/domainRegister/
         params:
-          $ref: "#/def/Domain/id"
+          - Domain.id
       transfer:
         spec: http://api.hostbillapp.com/domains/domainTransfer/
         params:
-          $ref: "#/def/Domain/id"
+          - Domain.id
       renew:
         spec: http://api.hostbillapp.com/domains/domainRenew/
         params:
-          $ref: "#/def/Domain/id"
+          - Domain.id
       delete:
         spec: http://api.hostbillapp.com/domains/domainDelete/
         params:
-          $ref: "#/def/Domain/id"
+          - Domain.id
       epp:
         spec: http://api.hostbillapp.com/domains/domainEPP/
         params:
-          $ref: "#/def/Domain/id"
+          - Domain.id
       get:
         spec: http://api.hostbillapp.com/domains/getDomainDetails/
         params:
-          $ref: "#/def/Domain/id"
+          - Domain.id
       getAll:
         spec: http://api.hostbillapp.com/domains/getDomains/
         params:
