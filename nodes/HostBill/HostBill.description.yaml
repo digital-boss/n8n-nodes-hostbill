@@ -1,0 +1,638 @@
+transformers:
+  - query: 'ToDo: all operations'
+    namespace: operations
+    methods:
+      - addHttpMethod # All operations use GET method
+      - addPath       # Add path for operations
+  - query: 'ToDo: options of options type'
+    methods:
+      - normalizeOptions
+  - query: 'ToDo: all params'
+    namespace: params
+    methods:
+      - paramsFromModel   # add params from Models
+      - addRequired # Parameters are required by default
+      - addType     # Default type is string
+      - addDefault
+      - adddisplay
+  - query: 'ToDo: All values from options type'
+
+
+resources:
+  - client:
+      operations:
+        - create:
+            spec: http://api.hostbillapp.com/clients/addClient/
+            params:
+              - $ref: '#/def/Contact/firstname'
+              - $ref: '#/def/Contact/lastname'
+              - $ref: '#/def/Contact/email'
+              - $ref: '#/def/Contact/password'
+              - $ref: '#/def/Contact/password2'
+
+              - name: optionalFields
+                display: Optional Fields
+                type: collection
+                options:
+                  - $ref: '#/def/Client/notifyclient'
+                  - $ref: '#/def/Client/type'
+                  - $ref: '#/def/Client/language'
+                  - $ref: '#/def/Client/companyname'
+                  - $ref: '#/def/Contact/phonenumber'
+                  - $ref: '#/def/Contact/address1'
+                  - $ref: '#/def/Contact/address2'
+                  - $ref: '#/def/Contact/city'
+                  - $ref: '#/def/Contact/state'
+                  - $ref: '#/def/Contact/postcode'
+                  - $ref: '#/def/Contact/country'
+                  # ToDo: add priveleges
+
+        - delete:
+            spec: http://api.hostbillapp.com/clients/deleteClient/
+            params:
+              - $ref: '#/def/Client/id'
+        - get:
+            spec: http://api.hostbillapp.com/clients/getClientDetails/
+            params:
+              - $ref: '#/def/Client/id'
+        - getAll:
+            spec: http://api.hostbillapp.com/clients/getClients/
+            params:
+              - $ref: '#/def/fields/page'
+        - getDomains:
+            spec: https://api.hostbillapp.com/clients/getClientDomains/
+            params:
+              - $ref: '#/def/Client/id'
+              - $ref: '#/def/fields/page'
+        - update:
+            spec: http://api.hostbillapp.com/clients/setClientDetails/
+            params:
+              - $ref: '#/def/Client/id'
+              - name: optionalFields
+                type: collection
+                options:
+                  - $ref: '#/def/Contact/firstname'
+                  - $ref: '#/def/Contact/lastname'
+                  - $ref: '#/def/Contact/companyname'
+                  - $ref: '#/def/Contact/address1'
+                  - $ref: '#/def/Contact/address2'
+                  - $ref: '#/def/Contact/city'
+                  - $ref: '#/def/Contact/state'
+                  - $ref: '#/def/Contact/postcode'
+                  - $ref: '#/def/Contact/country'
+                  - $ref: '#/def/Contact/phonenumber'
+
+        - verifyLogin:
+            spec: https://api.hostbillapp.com/clients/verifyClientLogin/
+            params:
+              - name: email
+              - name: password
+
+  - clientContact:
+      operations:
+        - create:
+            spec: http://api.hostbillapp.com/clients/addClientContact/
+            params:
+              - $ref: '#/def/Client/id'
+              - $ref: '#/def/Contact/firstname'
+              - $ref: '#/def/Contact/lastname'
+              - $ref: '#/def/Contact/email'
+              - $ref: '#/def/Contact/password'
+              - $ref: '#/def/Contact/password2'
+              - name: Optional Fields
+                type: collection
+                options:
+                  - $ref: '#/def/Contact/phonenumber'
+                  - $ref: '#/def/Contact/address1'
+                  - $ref: '#/def/Contact/address2'
+                  - $ref: '#/def/Contact/city'
+                  - $ref: '#/def/Contact/state'
+                  - $ref: '#/def/Contact/postcode'
+                  - $ref: '#/def/Contact/country'
+                  # ToDo: add priveleges
+
+        - delete:
+            spec: http://api.hostbillapp.com/clients/deleteClientContact/
+            params:
+              - name: client_id
+                display: Contact ID to Remove
+              - name: parent_id
+                displyName: Client ID
+                desc: Client main profile ID contact is removed from
+
+        - getByClient:
+            spec: http://api.hostbillapp.com/clients/getClientContacts/
+            params:
+              - $ref: '#/def/Client/id'
+              - $ref: '#/def/fields/page'
+
+        - update:
+            spec: http://api.hostbillapp.com/clients/setContactDetails/
+            params:
+              - $ref: '#/def/Contact/id'
+              - name: Optional Fields
+                type: collection
+                options:
+                  - $ref: '#/def/Contact/firstname'
+                  - $ref: '#/def/Contact/lastname'
+                  - $ref: '#/def/Contact/companyname'
+                  - $ref: '#/def/Contact/address1'
+                  - $ref: '#/def/Contact/address2'
+                  - $ref: '#/def/Contact/city'
+                  - $ref: '#/def/Contact/state'
+                  - $ref: '#/def/Contact/postcode'
+                  - $ref: '#/def/Contact/country'
+                  - $ref: '#/def/Contact/phonenumber'
+
+  - invoice:
+      operations:
+        - create:
+            spec: https://api.hostbillapp.com/invoices/addInvoice/
+            params:
+              - name: client_id
+                display: Client ID
+                type: number
+                desc: Client id to create invoice for
+
+        - addItem:
+            spec: https://api.hostbillapp.com/invoices/addInvoiceItem/
+            params:
+              - $ref: '#/def/Invoice/id'
+              - name: line
+                display: Description
+                desc: Description of new invoice item
+              - name: price
+                display: Price
+              - name: qty
+                display: Item QTY
+                type: number
+                default: 1
+              - name: tax
+                display: Item is Taxed
+                type: boolean
+                converter: 'ToDo: true -> 1, false -> 0'
+
+        - addPayment:
+            spec: https://api.hostbillapp.com/invoices/addInvoicePayment/
+            params:
+              - $ref: '#/def/Invoice/id'
+              - name: amount
+                display: Transaction amount
+                type: number
+              - name: paymentmodule
+                type: number
+                display: Payment Gateway ID
+                desc: ID of related payment gateway
+              - name: fee
+                desc: Fees applied to payment (0 for no fees)
+                type: number
+              - name: date
+                display: Transaction Date
+                type: dateTime
+              - name: Optional Fields
+                type: collection
+                options:
+                  - name: transnumber
+                    display: Transaction Number
+                    type: number
+                  - name: currency_id
+                    display: Currency ID
+                    type: number
+                  - name: rate
+                    display: Currency Rate
+                    type: number
+
+        - setStatus:
+            spec: https://api.hostbillapp.com/invoices/setInvoiceStatus/
+            params:
+              - $ref: '#/def/Invoice/id'
+              - name: status
+                type: options
+                options:
+                  - Paid
+                  - Unpaid
+                  - Cancelled
+        - delete:
+            spec: https://api.hostbillapp.com/invoices/deleteInvoice/
+            params:
+              - $ref: '#/def/Invoice/id'
+        - get:
+            spec: https://api.hostbillapp.com/invoices/getInvoiceDetails/
+            params:
+              - $ref: '#/def/Invoice/id'
+        - getAll:
+            spec: https://api.hostbillapp.com/invoices/getInvoices/
+            params:
+              - $ref: '#/def/fields/page'
+              - name: list
+                display: Status of invoices to list
+                type: options
+                options:
+                  - all
+                  - paid
+                  - unpaid
+                  - cancelled
+                default: 'all'
+
+  - order:
+      operations:
+        - create:
+            spec: https://api.hostbillapp.com/orders/addOrder/
+            params:
+              - name: client_id
+                displayName: Client ID
+                type: number
+              - name: confirm
+                displayName: Notify Client
+                type: boolean
+                desc: Enable if you wish to notify client about this order
+                converter: 'ToDo: true -> 1, false -> 0'
+              - name: invoice_generate
+                displayName: Set to 1 if you wish to generate invoice for this order
+                type: boolean
+                desc: Set to 1 if you wish to generate invoice for this order
+                converter: 'ToDo: true -> 1, false -> 0'
+              - name: invoice_info
+                displayName: Send Invoice
+                type: boolean
+                desc: Enable if you wish to send invoice generated for this order
+                converter: 'ToDo: true -> 1, false -> 0'
+
+              - name: serviceFields
+                display: Ordering product/service
+                type: collection
+                options:
+                  - name: module
+                    displayName: Payment module ID
+                    type: number
+                    desc: Payment module ID invoice should be generated with
+                  - name: product
+                    displayName: Service ID
+                    type: number
+                    desc: Service ID to purchase
+                  - name: domain_name
+                    displayName: Domain Name
+                  - $ref: '#/def/fields/cycle'
+                  - name: coupon
+                    displayName: Promocode
+                    desc: Valid promotion code
+
+              - name: domainFields
+                display: Ordering domain action
+                type: collection
+                desc: Ordering domain registration/transfer
+                options:
+                  - name: module
+                    displayName: Payment module ID
+                    type: number
+                    desc: Payment module ID invoice should be generated with
+                  - name: domain_action
+                    displayName: Type of Action
+                    type: options
+                    options:
+                      - register
+                      - transfer
+                  - name: domain_sld
+                    displayName: Domain Name
+                  - name: domain_period
+                    displayName: Number of Years
+                    type: number
+                  - name: domain_tld
+                    displayName: Top-level Domain
+                    desc: 'Domain tld, e.g.: .com, .org'
+                  - name: product
+                    displayName: Domain product ID
+                    type: number
+                    desc: 'Domain product ID - id of product from Domains order page type. Note: domain_tld is the prefered value and will be used if specified.'
+                  - name: domain_dns
+                    displayName: Enable DNS Management
+                    type: boolean
+                    desc: Set to 1 if you wish to enable DNS Management
+                    converter: 'ToDo'
+                  - name: domain_email
+                    displayName: Email Forwarding
+                    type: boolean
+                    desc: Set to 1 if you wish to enable Email Forwarding
+                    converter: 'ToDo'
+                  - name: domain_idp
+                    displayName: ID Protection
+                    type: boolean
+                    desc: Set to 1 if you wish to enable ID Protection
+                  - name: coupon
+                    displayName: Promocode
+                    desc: Valid promotion code
+
+        - delete:
+            spec: http://api.hostbillapp.com/orders/deleteOrder/
+            params:
+              - $ref: '#/def/Order/id'
+        - get:
+            spec: http://api.hostbillapp.com/orders/getOrderDetails/
+            params:
+              - $ref: '#/def/Order/id'
+        - getAll:
+            spec: http://api.hostbillapp.com/orders/getOrders/
+            params:
+              - $ref: '#/fields/page'
+              - name: list
+                display: Status or Orders to List
+                type: options
+                options:
+                  - all
+                  - active
+                  - pending
+                  - fraud
+                  - cancelled
+        - setStatus:
+            spec: http://api.hostbillapp.com/orders/setOrderStatus/
+            params:
+              - $ref: '#/def/Order/id'
+        - setActive:
+            spec: http://api.hostbillapp.com/orders/setOrderActive/
+            params:
+              - $ref: '#/def/Order/id'
+
+  - account:
+      operations:
+        - create:
+            spec: http://api.hostbillapp.com/accounts/accountCreate/
+            params:
+              - $ref: '#/def/Account/id'
+        - delete:
+            spec: http://api.hostbillapp.com/accounts/accountTerminate/
+            params:
+              - $ref: '#/def/Account/id'
+        - get:
+            spec: http://api.hostbillapp.com/accounts/getAccountDetails/
+            params:
+              - $ref: '#/def/Account/id'
+        - getAll:
+            spec: http://api.hostbillapp.com/accounts/getAccounts/
+            params:
+              - $ref: '#/def/fields/page'
+              - name: list
+                display: Status to List
+                type: options
+                options:
+                  - name: All
+                    value: all
+                  - name: Active
+                    value: all_active
+                  - name: Pending
+                    value: all_pending
+                  - name: Suspended
+                    value: all_suspended
+                  - name: Terminated
+                    value: all_terminated
+                  - name: Fraud
+                    value: all_fraud
+                  - name: Cancelled
+                    value: all_cancelled
+        - update:
+            spec: http://api.hostbillapp.com/accounts/editAccountDetails/
+            params:
+              - $ref: '#/def/Account/id'
+              - name: optionalFields
+                display: Optional Fields
+                type: options
+                options:
+                  - $ref: '#/Account/product_id'
+                  - $ref: '#/Account/date_created'
+                  - $ref: '#/Account/domain'
+                  - $ref: '#/Account/server_id'
+                  - $ref: '#/Account/payment_module'
+                  - $ref: '#/Account/firstpayment'
+                  - $ref: '#/Account/total'
+                  - $ref: '#/Account/next_due'
+                  - $ref: '#/Account/status'
+                  - $ref: '#/Account/username'
+                  - $ref: '#/Account/password'
+                  - $ref: '#/Account/rootpassword'
+                  - $ref: '#/Account/notes'
+        - addAddon:
+            spec: https://api.hostbillapp.com/accounts/addAddonToAccount/
+            params:
+              - name: account_id
+                display: Account ID
+                type: number
+              - name: addon_id
+                display: Addon ID
+                type: number
+                desc: ID of addon from hb_addons table to add
+              - name: optionalFields
+                display: Optional Fields
+                type: options
+                options:
+                  - name: invoice
+                    type: boolean
+                    desc: Set to true if invoice for adding this addon should be generated
+                    converter: 'ToDo'
+                  - $ref: '#/def/fields/cycle'
+                  - name: payment_module
+                    display: Payment Gateway ID
+                    type: number
+                    desc: If you choose to generate invoice, you can provide ID of payment gateway to use
+
+  - service:
+      operations:
+        - getProductDetails:
+            spec: http://api.hostbillapp.com/services/getProductDetails/
+            params:
+              - name: id
+                display: Product ID
+                type: number
+        - getProducts:
+            spec: http://api.hostbillapp.com/services/getProducts/
+            params:
+              - name: id
+                display: Orderpage ID
+                type: number
+
+  - domain:
+      operations:
+        - register:
+            spec: http://api.hostbillapp.com/domains/domainRegister/
+            params:
+              $ref: '#/def/Domain/id'
+        - transfer:
+            spec: http://api.hostbillapp.com/domains/domainTransfer/
+            params:
+              $ref: '#/def/Domain/id'
+        - renew:
+            spec: http://api.hostbillapp.com/domains/domainRenew/
+            params:
+              $ref: '#/def/Domain/id'
+        - delete:
+            spec: http://api.hostbillapp.com/domains/domainDelete/
+            params:
+              $ref: '#/def/Domain/id'
+        - epp:
+            spec: http://api.hostbillapp.com/domains/domainEPP/
+            params:
+              $ref: '#/def/Domain/id'
+        - get:
+            spec: http://api.hostbillapp.com/domains/getDomainDetails/
+            params:
+              $ref: '#/def/Domain/id'
+        - getAll:
+            spec: http://api.hostbillapp.com/domains/getDomains/
+            params:
+              - $ref: '#/def/fields/page'
+              - name: list
+                display: Status to List
+                type: options
+                options:
+                  - all
+                  - active
+                  - expired
+                  - pending
+                  - name: Pending Transfer
+                    value: pending_transfer
+                  - name: Pending Registration
+                    value: pending_registration
+
+# Definitions.
+def:
+  fields: # Common fields
+    page:
+      - name: page
+        desc: Which page to return
+        type: number
+    cycle:
+      - name: cycle
+        displayName: Billing cycle
+        type: options
+        desc: "Allowed values: 'm','q','s','a','b','t','d','w','h' or 'Free' or 'Once' where m-monthly, q-quarterly etc."
+        options:
+          - name: Monthly
+            value: m
+          - name: Quarterly
+            value: q
+          - name: s
+            value: s
+          - name: a
+            value: a
+          - name: b
+            value: b
+          - name: t
+            value: t
+          - name: d - Dayly?
+            value: d
+          - name: w - Weekly?
+            value: w
+          - name: h - Hourly?
+            value: h
+          - name: Free
+            value: Free
+          - name: Once
+            value: Once
+  Client:
+    - name: id
+      display: Client ID
+      type: number
+    - name: notifyclient
+      display: Notify Client
+      desc: Enable if you wish to send customer his login details
+      type: boolean
+      converter: 'ToDo: true -> yes, false -> no'
+    - name: type
+      desc: Client type - Private or Company values allowed here
+      type: options
+      options:
+        - Private
+        - Company
+    - name: language
+      desc: Customer default language, value has to be one of enabled languages
+    - name: companyname
+      display: Company Name
+      desc: Customer's company name (if any)
+
+  Contact:
+    - name: id
+      display: Client ID
+      type: number
+    - name: firstname
+      display: First name
+    - name: lastname
+      display: Last name
+    - name: companyname
+      display: Company Name
+      desc: Company name for organization type
+    - name: address1
+      display: Address Line 1
+    - name: address2
+      display: Address Line 2
+    - name: city
+    - name: state
+    - name: postcode
+      display: Post Code
+    - name: country
+    - name: phonenumber
+      display: Phone Number
+
+  Invoice:
+    - name: id
+      display: Invoice ID
+      type: number
+
+  Order:
+    - name: id
+      display: Order ID
+      type: number
+
+  Account:
+    - name: id
+      displayName: Account ID
+      type: number
+    - name: product_id
+      displayName: Product ID
+      type: number
+    - name: date_created
+      displayName: Creation Date
+      type: dateTime
+      desc: Sets account creation date
+    - name: domain
+      displayName: Domain/Hostname
+      desc: Sets account domain/hostname
+    - name: server_id
+      displayName: Server ID
+      type: number
+      desc: Sets server (ID) from which this account will be provisoned
+    - name: payment_module
+      displayName: Payment Module ID
+      type: number
+      desc: Sets payment module (ID) for this account
+    - name: firstpayment
+      displayName: First Payment
+      type: number
+      desc: Sets first payment amount
+    - name: total
+      displayName: Recurring Amount
+      type: number
+      desc: Sets recurring amount
+    - name: next_due
+      displayName: Next Due
+      type: dateTime
+      desc: Sets next due date
+    - name: status
+      displayName: Status
+      type: options
+      desc: Sets account status
+      options:
+        - Active
+        - Suspended
+        - Terminated
+    - name: username
+      displayName: Username
+      desc: Sets username for this account
+    - name: password
+      desc: Sets password for this account
+    - name: rootpassword
+      displayName: Root Password
+      desc: Sets root password
+    - name: notes
+
+  Domain:
+    - name: id
+      display: Domain ID
+      type: number
