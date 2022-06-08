@@ -24,37 +24,37 @@ resources:
         - create:
             spec: http://api.hostbillapp.com/clients/addClient/
             params:
-              - $ref: '#/def/Contact/firstname'
-              - $ref: '#/def/Contact/lastname'
-              - $ref: '#/def/Contact/email'
-              - $ref: '#/def/Contact/password'
-              - $ref: '#/def/Contact/password2'
+              - Contact.firstname
+              - Contact.lastname
+              - Contact.email
+              - Contact.password
+              - Contact.password2
 
               - name: optionalFields
                 display: Optional Fields
                 type: collection
                 options:
-                  - $ref: '#/def/Client/notifyclient'
-                  - $ref: '#/def/Client/type'
-                  - $ref: '#/def/Client/language'
-                  - $ref: '#/def/Client/companyname'
-                  - $ref: '#/def/Contact/phonenumber'
-                  - $ref: '#/def/Contact/address1'
-                  - $ref: '#/def/Contact/address2'
-                  - $ref: '#/def/Contact/city'
-                  - $ref: '#/def/Contact/state'
-                  - $ref: '#/def/Contact/postcode'
-                  - $ref: '#/def/Contact/country'
+                  - Client.notifyclient
+                  - Client.type
+                  - Client.language
+                  - Client.companyname
+                  - Contact.phonenumber
+                  - Contact.address1
+                  - Contact.address2
+                  - Contact.city
+                  - Contact.state
+                  - Contact.postcode
+                  - Contact.country
                   # ToDo: add priveleges
 
         - delete:
             spec: http://api.hostbillapp.com/clients/deleteClient/
             params:
-              - $ref: '#/def/Client/id'
+              - Client.id
         - get:
             spec: http://api.hostbillapp.com/clients/getClientDetails/
             params:
-              - $ref: '#/def/Client/id'
+              - Client.id
         - getAll:
             spec: http://api.hostbillapp.com/clients/getClients/
             params:
@@ -62,25 +62,25 @@ resources:
         - getDomains:
             spec: https://api.hostbillapp.com/clients/getClientDomains/
             params:
-              - $ref: '#/def/Client/id'
+              - Client.id
               - $ref: '#/def/fields/page'
         - update:
             spec: http://api.hostbillapp.com/clients/setClientDetails/
             params:
-              - $ref: '#/def/Client/id'
+              - Client.id
               - name: optionalFields
                 type: collection
                 options:
-                  - $ref: '#/def/Contact/firstname'
-                  - $ref: '#/def/Contact/lastname'
-                  - $ref: '#/def/Contact/companyname'
-                  - $ref: '#/def/Contact/address1'
-                  - $ref: '#/def/Contact/address2'
-                  - $ref: '#/def/Contact/city'
-                  - $ref: '#/def/Contact/state'
-                  - $ref: '#/def/Contact/postcode'
-                  - $ref: '#/def/Contact/country'
-                  - $ref: '#/def/Contact/phonenumber'
+                  - Contact.firstname
+                  - Contact.lastname
+                  - Contact.companyname
+                  - Contact.address1
+                  - Contact.address2
+                  - Contact.city
+                  - Contact.state
+                  - Contact.postcode
+                  - Contact.country
+                  - Contact.phonenumber
 
         - verifyLogin:
             spec: https://api.hostbillapp.com/clients/verifyClientLogin/
@@ -93,22 +93,22 @@ resources:
         - create:
             spec: http://api.hostbillapp.com/clients/addClientContact/
             params:
-              - $ref: '#/def/Client/id'
-              - $ref: '#/def/Contact/firstname'
-              - $ref: '#/def/Contact/lastname'
-              - $ref: '#/def/Contact/email'
-              - $ref: '#/def/Contact/password'
-              - $ref: '#/def/Contact/password2'
+              - Client.id
+              - Contact.firstname
+              - Contact.lastname
+              - Contact.email
+              - Contact.password
+              - Contact.password2
               - name: Optional Fields
                 type: collection
                 options:
-                  - $ref: '#/def/Contact/phonenumber'
-                  - $ref: '#/def/Contact/address1'
-                  - $ref: '#/def/Contact/address2'
-                  - $ref: '#/def/Contact/city'
-                  - $ref: '#/def/Contact/state'
-                  - $ref: '#/def/Contact/postcode'
-                  - $ref: '#/def/Contact/country'
+                  - Contact.phonenumber
+                  - Contact.address1
+                  - Contact.address2
+                  - Contact.city
+                  - Contact.state
+                  - Contact.postcode
+                  - Contact.country
                   # ToDo: add priveleges
 
         - delete:
@@ -123,26 +123,26 @@ resources:
         - getByClient:
             spec: http://api.hostbillapp.com/clients/getClientContacts/
             params:
-              - $ref: '#/def/Client/id'
+              - Client.id
               - $ref: '#/def/fields/page'
 
         - update:
             spec: http://api.hostbillapp.com/clients/setContactDetails/
             params:
-              - $ref: '#/def/Contact/id'
+              - Contact.id
               - name: Optional Fields
                 type: collection
                 options:
-                  - $ref: '#/def/Contact/firstname'
-                  - $ref: '#/def/Contact/lastname'
-                  - $ref: '#/def/Contact/companyname'
-                  - $ref: '#/def/Contact/address1'
-                  - $ref: '#/def/Contact/address2'
-                  - $ref: '#/def/Contact/city'
-                  - $ref: '#/def/Contact/state'
-                  - $ref: '#/def/Contact/postcode'
-                  - $ref: '#/def/Contact/country'
-                  - $ref: '#/def/Contact/phonenumber'
+                  - Contact.firstname
+                  - Contact.lastname
+                  - Contact.companyname
+                  - Contact.address1
+                  - Contact.address2
+                  - Contact.city
+                  - Contact.state
+                  - Contact.postcode
+                  - Contact.country
+                  - Contact.phonenumber
 
   - invoice:
       operations:
@@ -157,7 +157,7 @@ resources:
         - addItem:
             spec: https://api.hostbillapp.com/invoices/addInvoiceItem/
             params:
-              - $ref: '#/def/Invoice/id'
+              - Invoice.id
               - name: line
                 display: Description
                 desc: Description of new invoice item
@@ -175,7 +175,7 @@ resources:
         - addPayment:
             spec: https://api.hostbillapp.com/invoices/addInvoicePayment/
             params:
-              - $ref: '#/def/Invoice/id'
+              - Invoice.id
               - name: amount
                 display: Transaction amount
                 type: number
@@ -205,7 +205,7 @@ resources:
         - setStatus:
             spec: https://api.hostbillapp.com/invoices/setInvoiceStatus/
             params:
-              - $ref: '#/def/Invoice/id'
+              - Invoice.id
               - name: status
                 type: options
                 options:
@@ -215,11 +215,11 @@ resources:
         - delete:
             spec: https://api.hostbillapp.com/invoices/deleteInvoice/
             params:
-              - $ref: '#/def/Invoice/id'
+              - Invoice.id
         - get:
             spec: https://api.hostbillapp.com/invoices/getInvoiceDetails/
             params:
-              - $ref: '#/def/Invoice/id'
+              - Invoice.id
         - getAll:
             spec: https://api.hostbillapp.com/invoices/getInvoices/
             params:
@@ -325,11 +325,11 @@ resources:
         - delete:
             spec: http://api.hostbillapp.com/orders/deleteOrder/
             params:
-              - $ref: '#/def/Order/id'
+              - Order.id
         - get:
             spec: http://api.hostbillapp.com/orders/getOrderDetails/
             params:
-              - $ref: '#/def/Order/id'
+              - Order.id
         - getAll:
             spec: http://api.hostbillapp.com/orders/getOrders/
             params:
@@ -346,26 +346,26 @@ resources:
         - setStatus:
             spec: http://api.hostbillapp.com/orders/setOrderStatus/
             params:
-              - $ref: '#/def/Order/id'
+              - Order.id
         - setActive:
             spec: http://api.hostbillapp.com/orders/setOrderActive/
             params:
-              - $ref: '#/def/Order/id'
+              - Order.id
 
   - account:
       operations:
         - create:
             spec: http://api.hostbillapp.com/accounts/accountCreate/
             params:
-              - $ref: '#/def/Account/id'
+              - Account.id
         - delete:
             spec: http://api.hostbillapp.com/accounts/accountTerminate/
             params:
-              - $ref: '#/def/Account/id'
+              - Account.id
         - get:
             spec: http://api.hostbillapp.com/accounts/getAccountDetails/
             params:
-              - $ref: '#/def/Account/id'
+              - Account.id
         - getAll:
             spec: http://api.hostbillapp.com/accounts/getAccounts/
             params:
@@ -391,7 +391,7 @@ resources:
         - update:
             spec: http://api.hostbillapp.com/accounts/editAccountDetails/
             params:
-              - $ref: '#/def/Account/id'
+              - Account.id
               - name: optionalFields
                 display: Optional Fields
                 type: options
@@ -526,113 +526,115 @@ def:
             value: Free
           - name: Once
             value: Once
-  Client:
-    - name: id
-      display: Client ID
-      type: number
-    - name: notifyclient
-      display: Notify Client
-      desc: Enable if you wish to send customer his login details
-      type: boolean
-      converter: 'ToDo: true -> yes, false -> no'
-    - name: type
-      desc: Client type - Private or Company values allowed here
-      type: options
-      options:
-        - Private
-        - Company
-    - name: language
-      desc: Customer default language, value has to be one of enabled languages
-    - name: companyname
-      display: Company Name
-      desc: Customer's company name (if any)
 
-  Contact:
-    - name: id
-      display: Client ID
-      type: number
-    - name: firstname
-      display: First name
-    - name: lastname
-      display: Last name
-    - name: companyname
-      display: Company Name
-      desc: Company name for organization type
-    - name: address1
-      display: Address Line 1
-    - name: address2
-      display: Address Line 2
-    - name: city
-    - name: state
-    - name: postcode
-      display: Post Code
-    - name: country
-    - name: phonenumber
-      display: Phone Number
+models:
+	Client:
+		- name: id
+			display: Client ID
+			type: number
+		- name: notifyclient
+			display: Notify Client
+			desc: Enable if you wish to send customer his login details
+			type: boolean
+			converter: 'ToDo: true -> yes, false -> no'
+		- name: type
+			desc: Client type - Private or Company values allowed here
+			type: options
+			options:
+				- Private
+				- Company
+		- name: language
+			desc: Customer default language, value has to be one of enabled languages
+		- name: companyname
+			display: Company Name
+			desc: Customer's company name (if any)
 
-  Invoice:
-    - name: id
-      display: Invoice ID
-      type: number
+	Contact:
+		- name: id
+			display: Client ID
+			type: number
+		- name: firstname
+			display: First name
+		- name: lastname
+			display: Last name
+		- name: companyname
+			display: Company Name
+			desc: Company name for organization type
+		- name: address1
+			display: Address Line 1
+		- name: address2
+			display: Address Line 2
+		- name: city
+		- name: state
+		- name: postcode
+			display: Post Code
+		- name: country
+		- name: phonenumber
+			display: Phone Number
 
-  Order:
-    - name: id
-      display: Order ID
-      type: number
+	Invoice:
+		- name: id
+			display: Invoice ID
+			type: number
 
-  Account:
-    - name: id
-      displayName: Account ID
-      type: number
-    - name: product_id
-      displayName: Product ID
-      type: number
-    - name: date_created
-      displayName: Creation Date
-      type: dateTime
-      desc: Sets account creation date
-    - name: domain
-      displayName: Domain/Hostname
-      desc: Sets account domain/hostname
-    - name: server_id
-      displayName: Server ID
-      type: number
-      desc: Sets server (ID) from which this account will be provisoned
-    - name: payment_module
-      displayName: Payment Module ID
-      type: number
-      desc: Sets payment module (ID) for this account
-    - name: firstpayment
-      displayName: First Payment
-      type: number
-      desc: Sets first payment amount
-    - name: total
-      displayName: Recurring Amount
-      type: number
-      desc: Sets recurring amount
-    - name: next_due
-      displayName: Next Due
-      type: dateTime
-      desc: Sets next due date
-    - name: status
-      displayName: Status
-      type: options
-      desc: Sets account status
-      options:
-        - Active
-        - Suspended
-        - Terminated
-    - name: username
-      displayName: Username
-      desc: Sets username for this account
-    - name: password
-      desc: Sets password for this account
-    - name: rootpassword
-      displayName: Root Password
-      desc: Sets root password
-    - name: notes
+	Order:
+		- name: id
+			display: Order ID
+			type: number
 
-  Domain:
-    - name: id
-      display: Domain ID
-      type: number
+	Account:
+		- name: id
+			displayName: Account ID
+			type: number
+		- name: product_id
+			displayName: Product ID
+			type: number
+		- name: date_created
+			displayName: Creation Date
+			type: dateTime
+			desc: Sets account creation date
+		- name: domain
+			displayName: Domain/Hostname
+			desc: Sets account domain/hostname
+		- name: server_id
+			displayName: Server ID
+			type: number
+			desc: Sets server (ID) from which this account will be provisoned
+		- name: payment_module
+			displayName: Payment Module ID
+			type: number
+			desc: Sets payment module (ID) for this account
+		- name: firstpayment
+			displayName: First Payment
+			type: number
+			desc: Sets first payment amount
+		- name: total
+			displayName: Recurring Amount
+			type: number
+			desc: Sets recurring amount
+		- name: next_due
+			displayName: Next Due
+			type: dateTime
+			desc: Sets next due date
+		- name: status
+			displayName: Status
+			type: options
+			desc: Sets account status
+			options:
+				- Active
+				- Suspended
+				- Terminated
+		- name: username
+			displayName: Username
+			desc: Sets username for this account
+		- name: password
+			desc: Sets password for this account
+		- name: rootpassword
+			displayName: Root Password
+			desc: Sets root password
+		- name: notes
+
+	Domain:
+		- name: id
+			display: Domain ID
+			type: number
