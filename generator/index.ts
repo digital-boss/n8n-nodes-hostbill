@@ -3,67 +3,10 @@
 import $RefParser from '@apidevtools/json-schema-ref-parser';
 import yaml from 'js-yaml';
 import fs from 'fs';
-
-type NodePropertyTypes =
-	| 'boolean'
-	| 'collection'
-	| 'color'
-	| 'dateTime'
-	| 'fixedCollection'
-	| 'hidden'
-	| 'json'
-	| 'notice'
-	| 'multiOptions'
-	| 'number'
-	| 'options'
-	| 'string'
-	| 'credentialsSelect';
-
-/******************************************************************************
- * Interfaces
- */
-
-type Dict<T> = { [key: string]: T };
-
-type Option = IOption | string;
-
-interface IOption {
-	name?: string;
-	value: string;
-}
-
-interface IParam {
-	name: string;
-	display?: string;
-	type?: NodePropertyTypes;
-	desc?: string;
-	required?: boolean;
-	default?: string;
-	options?: Param[] | Option[];
-}
-
-type Param = IParam | string;
-
-interface IOperation {
-	spec: string;
-	params: Param[];
-	path?: string;
-	method?: string;
-}
-
-interface IOperations {[name: string]: IOperation;}
-
-interface IResource {
-	operations: IOperations;
-}
-
-interface IResources { [name: string]: IResource; }
-
-interface INode {
-	resources: IResources;
-	def: { [key: string]: any };
-	models: { [name: string]: IParam[] };
-}
+import { NodePropertyTypes } from 'n8n-workflow';
+import { INode, IOperation, IParam, IResource, Option, Param } from './compactTypes';
+import { Dict } from './types';
+import { generateDescriptions } from './descriptionsBuilder';
 
 
 /******************************************************************************
@@ -77,10 +20,14 @@ const mapArr = <T>(src: T[], node: INode, mappers: Array<(item: T, node: INode) 
 	});
 };
 
-const mapDict = <T>(src: Dict<T>, node: INode, mappers: Array<(item: T, node: INode) => T>) => {
+const mapDict = <T>(
+	src: Dict<T>,
+	node: INode,
+	mappers: Array<(item: T, node: INode, key: string) => T>,
+) => {
 	return Object.keys(src).reduce((acc, item) => {
 		acc[item] = src[item];
-		mappers.forEach(m => acc[item] = m(acc[item], node));
+		mappers.forEach(m => acc[item] = m(acc[item], node, item));
 		return acc;
 	}, {} as Dict<T>);
 };
@@ -94,9 +41,9 @@ const cap1st = (i: string): string => i[0].toUpperCase() + i.slice(1);
 
 const toYaml = (obj: any) => {
 	return yaml.dump(obj, {
-		noRefs: true
+		noRefs: true,
 	});
-}
+};
 
 
 /******************************************************************************
@@ -250,18 +197,22 @@ const mapParamRec = (param: Param, node: INode): Param => {
 	return mapParam(param, node);
 };
 
-const mapOperation = (op: IOperation, node: INode): IOperation => {
+const mapOperation = (op: IOperation, node: INode, key: string): IOperation => {
+	//const path = getPathFromSpec(op.spec);
 	return {
 		...op,
-		path: getPathFromSpec(op.spec), // add path. ToDo: extract method
-		method: 'GET',                  // add http method. ToDo: extract method
+		name: op.name ? op.name : key,
+		display: op.display ? op.display : cap1st(key),
+		path: getPathFromSpec(op.spec),
+		method: 'GET',
 		params: mapArr(op.params, node, [mapParamRec]),
 	};
 };
 
-const mapResource = (resource: IResource, node: INode): IResource => {
+const mapResource = (resource: IResource, node: INode, key: string): IResource => {
 	return {
 		...resource,
+		display: resource.display ? resource.display : cap1st(key),
 		operations: mapDict(resource.operations, node, [mapOperation]),
 	};
 };
@@ -274,17 +225,32 @@ const mapResource = (resource: IResource, node: INode): IResource => {
 const normalizeNodeDesc = (node: INode): INode => {
 	return {
 		...node,
-		resources: mapDict(node.resources, node, [mapResource])
-	}
+		resources: mapDict(node.resources, node, [mapResource]),
+	};
 };
 
 const outDir = 'nodes/HostBill/descriptions';
 
+const getJsModule = (json: any, name: string): string => {
+	const str = JSON.stringify(json, undefined, "\t");
+	const type = name === 'resources' ? 'INodeProperties' : 'INodeProperties[]';
+	return `import { INodeProperties } from "n8n-workflow";
+
+export const ${name}: ${type} = ${str}`;
+};
+
 const process = (node: INode) => {
 	const normNode = normalizeNodeDesc(node);
+	const descriptionsDict = generateDescriptions(normNode);
 
 	fs.writeFileSync(`${outDir}/norm.json`, JSON.stringify(normNode, undefined, 2), 'utf-8');
 	fs.writeFileSync(`${outDir}/norm.yaml`, toYaml(normNode), 'utf-8');
+
+	Object.keys(descriptionsDict).map(key => {
+		const props = descriptionsDict[key];
+
+		fs.writeFileSync(`${outDir}/${key}.ts`, getJsModule(props, key), 'utf-8');
+	});
 };
 
 
