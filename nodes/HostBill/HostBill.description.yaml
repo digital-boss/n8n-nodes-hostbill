@@ -20,6 +20,7 @@ transformers:
 
 resources:
   client:
+    defaultOperation: getAll
     operations:
       create:
         spec: http://api.hostbillapp.com/clients/addClient/
@@ -56,10 +57,12 @@ resources:
         params:
           - Client.id
       getAll:
+				display: Get All
         spec: http://api.hostbillapp.com/clients/getClients/
         params:
           - $ref: "#/def/fields/page"
       getDomains:
+				display: Get Domains
         spec: https://api.hostbillapp.com/clients/getClientDomains/
         params:
           - Client.id
@@ -83,12 +86,14 @@ resources:
               - Contact.phonenumber
 
       verifyLogin:
+				display: Verify Login
         spec: https://api.hostbillapp.com/clients/verifyClientLogin/
         params:
           - name: email
           - name: password
 
   clientContact:
+    defaultOperation: getByClient
     operations:
       create:
         spec: http://api.hostbillapp.com/clients/addClientContact/
@@ -121,6 +126,7 @@ resources:
             desc: Client main profile ID contact is removed from
 
       getByClient:
+				display: Get by Client
         spec: http://api.hostbillapp.com/clients/getClientContacts/
         params:
           - Client.id
@@ -145,6 +151,7 @@ resources:
               - Contact.phonenumber
 
   invoice:
+    defaultOperation: getAll
     operations:
       create:
         spec: https://api.hostbillapp.com/invoices/addInvoice/
@@ -155,6 +162,7 @@ resources:
             desc: Client id to create invoice for
 
       addItem:
+				display: Add Item
         spec: https://api.hostbillapp.com/invoices/addInvoiceItem/
         params:
           - Invoice.id
@@ -173,6 +181,7 @@ resources:
             converter: "ToDo: true -> 1, false -> 0"
 
       addPayment:
+				display: Add Payment
         spec: https://api.hostbillapp.com/invoices/addInvoicePayment/
         params:
           - Invoice.id
@@ -203,6 +212,7 @@ resources:
                 type: number
 
       setStatus:
+				display: Set Status
         spec: https://api.hostbillapp.com/invoices/setInvoiceStatus/
         params:
           - Invoice.id
@@ -224,6 +234,7 @@ resources:
           - Invoice.id
 
       getAll:
+				display: Get All
         spec: https://api.hostbillapp.com/invoices/getInvoices/
         params:
           - $ref: "#/def/fields/page"
@@ -235,9 +246,10 @@ resources:
               - paid
               - unpaid
               - cancelled
-            default: "all"
+            default: all
 
   order:
+    defaultOperation: getAll
     operations:
       create:
         spec: https://api.hostbillapp.com/orders/addOrder/
@@ -336,6 +348,7 @@ resources:
           - Order.id
 
       getAll:
+				display: Get All
         spec: http://api.hostbillapp.com/orders/getOrders/
         params:
           - $ref: "#/def/fields/page"
@@ -350,16 +363,19 @@ resources:
               - cancelled
 
       setStatus:
+				display: Set Status
         spec: http://api.hostbillapp.com/orders/setOrderStatus/
         params:
           - Order.id
 
       setActive:
+				display: Set Active
         spec: http://api.hostbillapp.com/orders/setOrderActive/
         params:
           - Order.id
 
   account:
+    defaultOperation: getAll
     operations:
       create:
         spec: http://api.hostbillapp.com/accounts/accountCreate/
@@ -377,6 +393,7 @@ resources:
           - Account.id
 
       getAll:
+				display: Get All
         spec: http://api.hostbillapp.com/accounts/getAccounts/
         params:
           - $ref: "#/def/fields/page"
@@ -422,6 +439,7 @@ resources:
               - Account.notes
 
       addAddon:
+				display: Add Addon
         spec: https://api.hostbillapp.com/accounts/addAddonToAccount/
         params:
           - name: account_id
@@ -446,8 +464,10 @@ resources:
                 desc: If you choose to generate invoice, you can provide ID of payment gateway to use
 
   service:
+    defaultOperation: getProducts
     operations:
       getProductDetails:
+				display: Get Product Details
         spec: http://api.hostbillapp.com/services/getProductDetails/
         params:
           - name: id
@@ -455,6 +475,7 @@ resources:
             type: number
 
       getProducts:
+				display: Get Products
         spec: http://api.hostbillapp.com/services/getProducts/
         params:
           - name: id
@@ -462,6 +483,7 @@ resources:
             type: number
 
   domain:
+    defaultOperation: getAll
     operations:
       register:
         spec: http://api.hostbillapp.com/domains/domainRegister/
@@ -488,6 +510,7 @@ resources:
         params:
           - Domain.id
       getAll:
+				display: Get All
         spec: http://api.hostbillapp.com/domains/getDomains/
         params:
           - $ref: "#/def/fields/page"
@@ -555,7 +578,7 @@ models:
     - name: type
       desc: Client type - Private or Company values allowed here
       type: options
-      options: 
+      options:
         - Private
         - Company
     - name: language
@@ -640,7 +663,7 @@ models:
       displayName: Status
       type: options
       desc: Sets account status
-      options: 
+      options:
         - Active
         - Suspended
         - Terminated
