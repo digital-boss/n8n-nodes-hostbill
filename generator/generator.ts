@@ -278,11 +278,13 @@ const normalizeNodeDesc = (node: INode): INode => {
 	}
 };
 
+const outDir = 'nodes/HostBill/descriptions';
+
 const process = (node: INode) => {
 	const normNode = normalizeNodeDesc(node);
 
-	fs.writeFileSync('out/out.json', JSON.stringify(normNode, undefined, 2), 'utf-8');
-	fs.writeFileSync('out/out.yaml', toYaml(normNode), 'utf-8');
+	fs.writeFileSync(`${outDir}/norm.json`, JSON.stringify(normNode, undefined, 2), 'utf-8');
+	fs.writeFileSync(`${outDir}/norm.yaml`, toYaml(normNode), 'utf-8');
 };
 
 

@@ -34,7 +34,8 @@
     "test": "jest",
     "release": "npm run build && npm publish --access=public",
     "version": "npm run build",
-    "postversion": "git push"
+    "postversion": "git push",
+    "gen": "node -r esbuild-runner/register generator/generator.ts"
   },
   "files": [
     "dist"
@@ -48,13 +49,18 @@
     ]
   },
   "devDependencies": {
+    "@apidevtools/json-schema-ref-parser": "^9.0.9",
     "@types/express": "^4.17.6",
     "@types/jest": "^27.4.0",
+    "@types/js-yaml": "^4.0.5",
     "@types/node": "14.17.27",
     "@types/request-promise-native": "~1.0.15",
+    "esbuild": "^0.14.43",
+    "esbuild-runner": "^2.2.1",
     "genversion": "^3.1.1",
     "gulp": "^4.0.0",
     "jest": "^27.4.7",
+    "js-yaml": "^4.1.0",
     "n8n-workflow": "~0.101.0",
     "nodelinter": "^0.1.9",
     "ts-jest": "^27.1.3",
