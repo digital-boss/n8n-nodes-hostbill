@@ -57,12 +57,12 @@ resources:
         params:
           - Client.id
       getAll:
-				display: Get All
+        display: Get All
         spec: http://api.hostbillapp.com/clients/getClients/
         params:
           - $ref: "#/def/fields/page"
       getDomains:
-				display: Get Domains
+        display: Get Domains
         spec: https://api.hostbillapp.com/clients/getClientDomains/
         params:
           - Client.id
@@ -86,7 +86,7 @@ resources:
               - Contact.phonenumber
 
       verifyLogin:
-				display: Verify Login
+        display: Verify Login
         spec: https://api.hostbillapp.com/clients/verifyClientLogin/
         params:
           - name: email
@@ -126,7 +126,7 @@ resources:
             desc: Client main profile ID contact is removed from
 
       getByClient:
-				display: Get by Client
+        display: Get by Client
         spec: http://api.hostbillapp.com/clients/getClientContacts/
         params:
           - Client.id
@@ -162,7 +162,7 @@ resources:
             desc: Client id to create invoice for
 
       addItem:
-				display: Add Item
+        display: Add Item
         spec: https://api.hostbillapp.com/invoices/addInvoiceItem/
         params:
           - Invoice.id
@@ -181,7 +181,7 @@ resources:
             converter: "ToDo: true -> 1, false -> 0"
 
       addPayment:
-				display: Add Payment
+        display: Add Payment
         spec: https://api.hostbillapp.com/invoices/addInvoicePayment/
         params:
           - Invoice.id
@@ -212,7 +212,7 @@ resources:
                 type: number
 
       setStatus:
-				display: Set Status
+        display: Set Status
         spec: https://api.hostbillapp.com/invoices/setInvoiceStatus/
         params:
           - Invoice.id
@@ -234,7 +234,7 @@ resources:
           - Invoice.id
 
       getAll:
-				display: Get All
+        display: Get All
         spec: https://api.hostbillapp.com/invoices/getInvoices/
         params:
           - $ref: "#/def/fields/page"
@@ -348,7 +348,7 @@ resources:
           - Order.id
 
       getAll:
-				display: Get All
+        display: Get All
         spec: http://api.hostbillapp.com/orders/getOrders/
         params:
           - $ref: "#/def/fields/page"
@@ -363,13 +363,13 @@ resources:
               - cancelled
 
       setStatus:
-				display: Set Status
+        display: Set Status
         spec: http://api.hostbillapp.com/orders/setOrderStatus/
         params:
           - Order.id
 
       setActive:
-				display: Set Active
+        display: Set Active
         spec: http://api.hostbillapp.com/orders/setOrderActive/
         params:
           - Order.id
@@ -393,7 +393,7 @@ resources:
           - Account.id
 
       getAll:
-				display: Get All
+        display: Get All
         spec: http://api.hostbillapp.com/accounts/getAccounts/
         params:
           - $ref: "#/def/fields/page"
@@ -439,7 +439,7 @@ resources:
               - Account.notes
 
       addAddon:
-				display: Add Addon
+        display: Add Addon
         spec: https://api.hostbillapp.com/accounts/addAddonToAccount/
         params:
           - name: account_id
@@ -467,7 +467,7 @@ resources:
     defaultOperation: getProducts
     operations:
       getProductDetails:
-				display: Get Product Details
+        display: Get Product Details
         spec: http://api.hostbillapp.com/services/getProductDetails/
         params:
           - name: id
@@ -475,7 +475,7 @@ resources:
             type: number
 
       getProducts:
-				display: Get Products
+        display: Get Products
         spec: http://api.hostbillapp.com/services/getProducts/
         params:
           - name: id
@@ -510,7 +510,7 @@ resources:
         params:
           - Domain.id
       getAll:
-				display: Get All
+        display: Get All
         spec: http://api.hostbillapp.com/domains/getDomains/
         params:
           - $ref: "#/def/fields/page"
