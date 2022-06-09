@@ -93,6 +93,7 @@ resources:
           - name: password
 
   clientContact:
+    display: Client Contact
     defaultOperation: getByClient
     operations:
       create:
