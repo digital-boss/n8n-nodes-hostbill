@@ -15,7 +15,8 @@ transformers:
       - addType # Default type is string
       - addDefault
       - adddisplay
-  - query: "ToDo: All values from options type"
+  - query: "ToDo: Normalize params with options type"
+
 
 resources:
   client:
@@ -404,7 +405,7 @@ resources:
           - Account.id
           - name: optionalFields
             display: Optional Fields
-            type: options
+            type: collection
             options:
               - Account.product_id
               - Account.date_created
@@ -432,7 +433,7 @@ resources:
             desc: ID of addon from hb_addons table to add
           - name: optionalFields
             display: Optional Fields
-            type: options
+            type: collection
             options:
               - name: invoice
                 type: boolean
@@ -503,41 +504,43 @@ resources:
               - name: Pending Registration
                 value: pending_registration
 
+
 # Definitions.
 def:
   fields: # Common fields
     page:
-      - name: page
-        desc: Which page to return
-        type: number
+      name: page
+      desc: Which page to return
+      type: number
     cycle:
-      - name: cycle
-        displayName: Billing cycle
-        type: options
-        desc: "Allowed values: 'm','q','s','a','b','t','d','w','h' or 'Free' or 'Once' where m-monthly, q-quarterly etc."
-        options:
-          - name: Monthly
-            value: m
-          - name: Quarterly
-            value: q
-          - name: s
-            value: s
-          - name: a
-            value: a
-          - name: b
-            value: b
-          - name: t
-            value: t
-          - name: d - Dayly?
-            value: d
-          - name: w - Weekly?
-            value: w
-          - name: h - Hourly?
-            value: h
-          - name: Free
-            value: Free
-          - name: Once
-            value: Once
+      name: cycle
+      displayName: Billing cycle
+      type: options
+      desc: "Allowed values: 'm','q','s','a','b','t','d','w','h' or 'Free' or 'Once' where m-monthly, q-quarterly etc."
+      options:
+        - name: Monthly
+          value: m
+        - name: Quarterly
+          value: q
+        - name: s
+          value: s
+        - name: a
+          value: a
+        - name: b
+          value: b
+        - name: t
+          value: t
+        - name: d - Dayly?
+          value: d
+        - name: w - Weekly?
+          value: w
+        - name: h - Hourly?
+          value: h
+        - name: Free
+          value: Free
+        - name: Once
+          value: Once
+
 
 models:
   Client:
@@ -552,8 +555,9 @@ models:
     - name: type
       desc: Client type - Private or Company values allowed here
       type: options
-      options: Private
-        Company
+      options: 
+        - Private
+        - Company
     - name: language
       desc: Customer default language, value has to be one of enabled languages
     - name: companyname
@@ -568,6 +572,11 @@ models:
       display: First name
     - name: lastname
       display: Last name
+    - name: email
+    - name: password
+    - name: password2
+      display: Confirm Password
+      desc: Password confirmation (same as password)
     - name: companyname
       display: Company Name
       desc: Company name for organization type
@@ -631,9 +640,10 @@ models:
       displayName: Status
       type: options
       desc: Sets account status
-      options: Active
-        Suspended
-        Terminated
+      options: 
+        - Active
+        - Suspended
+        - Terminated
     - name: username
       displayName: Username
       desc: Sets username for this account
