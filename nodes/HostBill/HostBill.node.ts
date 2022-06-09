@@ -19,6 +19,7 @@ import { version } from '../version';
 import { HostBillApiCredentials } from '../../credentials/HostBillApi.credentials';
 import { resourceTypes } from './Resources';
 import { hostBillApiTest } from './HostBillApiTest';
+import { accountFields, clientContactFields, clientFields, domainFields, invoiceFields, orderFields, resources, serviceFields } from './descriptions';
 
 
 export class HostBill implements INodeType {
@@ -44,40 +45,14 @@ export class HostBill implements INodeType {
 			},
 		],
 		properties: [
-			{
-				displayName: 'Resource',
-				name: 'resource',
-				type: 'options',
-				noDataExpression: true,
-				options: [
-					{
-						name: 'Client',
-						value: 'client',
-					},
-					{
-						name: 'Billing',
-						value: 'billing',
-					},
-					{
-						name: 'Order',
-						value: 'order',
-					},
-					{
-						name: 'Account',
-						value: 'account',
-					},
-					{
-						name: 'Service',
-						value: 'service',
-					},
-					{
-						name: 'Domain',
-						value: 'domain',
-					},
-				],
-				default: 'customer',
-			},
-			// fields
+			resources,
+			...accountFields,
+			...clientContactFields,
+			...clientFields,
+			...domainFields,
+			...invoiceFields,
+			...orderFields,
+			...serviceFields,
 		],
 	};
 
