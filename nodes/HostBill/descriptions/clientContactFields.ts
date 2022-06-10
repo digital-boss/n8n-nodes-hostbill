@@ -223,7 +223,7 @@ export const clientContactFields: INodeProperties[] = [
 	},
 	{
 		"name": "parent_id",
-		"displayName": "Parent_id",
+		"displayName": "Client ID",
 		"type": "string",
 		"description": "Client main profile ID contact is removed from",
 		"required": true,

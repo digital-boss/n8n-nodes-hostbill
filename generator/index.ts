@@ -173,28 +173,26 @@ const mapParam = (param: Param, node: INode): Param => {
 };
 
 const mapParamRec = (param: Param, node: INode): Param => {
-	if (typeof param === 'object') {
-		if (param.options !== undefined) {
-			const options = param.type === 'collection'
-				? mapArr(param.options as Param[], node, [
+
+	const result = mapParam(param, node);
+
+	if (typeof result === 'object') {
+		if (result.options !== undefined) {
+			result.options = result.type === 'collection'
+				? mapArr(result.options as Param[], node, [
 						paramFromModel,
 						(p: Param, _: INode) => typeof p === 'object' ?  ({...p, required: false}) : p,
 						mapParamRec
 					])
-				: param.type === 'options'
-				? mapArr(param.options as Option[], node, [
+				: result.type === 'options'
+				? mapArr(result.options as Option[], node, [
 					optFromString,
 					optAddName,
 				])
-				: param.options;
-
-				return mapParam({
-					...param,
-					options,
-				}, node);
+				: result.options;
 		}
 	}
-	return mapParam(param, node);
+	return result;
 };
 
 const mapOperation = (op: IOperation, node: INode, key: string): IOperation => {

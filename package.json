@@ -35,7 +35,7 @@
     "release": "npm run build && npm publish --access=public",
     "version": "npm run build",
     "postversion": "git push",
-    "gen": "node -r esbuild-runner/register generator/generator.ts"
+    "gen": "node -r esbuild-runner/register generator/index.ts"
   },
   "files": [
     "dist"

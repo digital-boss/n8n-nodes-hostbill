@@ -43,7 +43,7 @@ export const orderFields: INodeProperties[] = [
 	},
 	{
 		"name": "client_id",
-		"displayName": "Client_id",
+		"displayName": "Client ID",
 		"type": "number",
 		"required": true,
 		"default": 0,
@@ -60,7 +60,7 @@ export const orderFields: INodeProperties[] = [
 	},
 	{
 		"name": "confirm",
-		"displayName": "Confirm",
+		"displayName": "Notify Client",
 		"type": "boolean",
 		"description": "Enable if you wish to notify client about this order",
 		"required": true,
@@ -78,9 +78,9 @@ export const orderFields: INodeProperties[] = [
 	},
 	{
 		"name": "invoice_generate",
-		"displayName": "Invoice_generate",
+		"displayName": "Generate Invoice",
 		"type": "boolean",
-		"description": "Set to 1 if you wish to generate invoice for this order",
+		"description": "Enable if you wish to generate invoice for this order",
 		"required": true,
 		"default": false,
 		"displayOptions": {
@@ -96,11 +96,29 @@ export const orderFields: INodeProperties[] = [
 	},
 	{
 		"name": "invoice_info",
-		"displayName": "Invoice_info",
+		"displayName": "Send Invoice",
 		"type": "boolean",
 		"description": "Enable if you wish to send invoice generated for this order",
 		"required": true,
 		"default": false,
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"order"
+				],
+				"operation": [
+					"create"
+				]
+			}
+		}
+	},
+	{
+		"name": "module",
+		"displayName": "Payment module ID",
+		"type": "number",
+		"description": "Payment module ID invoice should be generated with",
+		"required": true,
+		"default": 0,
 		"displayOptions": {
 			"show": {
 				"resource": [
@@ -130,16 +148,8 @@ export const orderFields: INodeProperties[] = [
 		},
 		"options": [
 			{
-				"name": "module",
-				"displayName": "Module",
-				"type": "number",
-				"description": "Payment module ID invoice should be generated with",
-				"required": false,
-				"default": 0
-			},
-			{
 				"name": "product",
-				"displayName": "Product",
+				"displayName": "Service ID",
 				"type": "number",
 				"description": "Service ID to purchase",
 				"required": false,
@@ -147,14 +157,14 @@ export const orderFields: INodeProperties[] = [
 			},
 			{
 				"name": "domain_name",
-				"displayName": "Domain_name",
+				"displayName": "Domain Name",
 				"type": "string",
 				"required": false,
 				"default": ""
 			},
 			{
 				"name": "cycle",
-				"displayName": "Cycle",
+				"displayName": "Billing cycle",
 				"type": "options",
 				"description": "Allowed values: 'm','q','s','a','b','t','d','w','h' or 'Free' or 'Once' where m-monthly, q-quarterly etc.",
 				"required": false,
@@ -185,7 +195,7 @@ export const orderFields: INodeProperties[] = [
 						"value": "t"
 					},
 					{
-						"name": "d - Dayly?",
+						"name": "d - Daily?",
 						"value": "d"
 					},
 					{
@@ -208,7 +218,7 @@ export const orderFields: INodeProperties[] = [
 			},
 			{
 				"name": "coupon",
-				"displayName": "Coupon",
+				"displayName": "Promocode",
 				"type": "string",
 				"description": "Valid promotion code",
 				"required": false,
@@ -235,16 +245,8 @@ export const orderFields: INodeProperties[] = [
 		},
 		"options": [
 			{
-				"name": "module",
-				"displayName": "Module",
-				"type": "number",
-				"description": "Payment module ID invoice should be generated with",
-				"required": false,
-				"default": 0
-			},
-			{
 				"name": "domain_action",
-				"displayName": "Domain_action",
+				"displayName": "Type of Action",
 				"type": "options",
 				"required": false,
 				"default": "",
@@ -261,21 +263,21 @@ export const orderFields: INodeProperties[] = [
 			},
 			{
 				"name": "domain_sld",
-				"displayName": "Domain_sld",
+				"displayName": "Domain Name",
 				"type": "string",
 				"required": false,
 				"default": ""
 			},
 			{
 				"name": "domain_period",
-				"displayName": "Domain_period",
+				"displayName": "Number of Years",
 				"type": "number",
 				"required": false,
 				"default": 0
 			},
 			{
 				"name": "domain_tld",
-				"displayName": "Domain_tld",
+				"displayName": "Top-level Domain",
 				"type": "string",
 				"description": "Domain tld, e.g.: .com, .org",
 				"required": false,
@@ -283,7 +285,7 @@ export const orderFields: INodeProperties[] = [
 			},
 			{
 				"name": "product",
-				"displayName": "Product",
+				"displayName": "Domain product ID",
 				"type": "number",
 				"description": "Domain product ID - id of product from Domains order page type. Note: domain_tld is the prefered value and will be used if specified.",
 				"required": false,
@@ -291,31 +293,31 @@ export const orderFields: INodeProperties[] = [
 			},
 			{
 				"name": "domain_dns",
-				"displayName": "Domain_dns",
+				"displayName": "Enable DNS Management",
 				"type": "boolean",
-				"description": "Set to 1 if you wish to enable DNS Management",
+				"description": "Enable if you wish to enable DNS Management",
 				"required": false,
 				"default": false
 			},
 			{
 				"name": "domain_email",
-				"displayName": "Domain_email",
+				"displayName": "Email Forwarding",
 				"type": "boolean",
-				"description": "Set to 1 if you wish to enable Email Forwarding",
+				"description": "Enable if you wish to enable Email Forwarding",
 				"required": false,
 				"default": false
 			},
 			{
 				"name": "domain_idp",
-				"displayName": "Domain_idp",
+				"displayName": "ID Protection",
 				"type": "boolean",
-				"description": "Set to 1 if you wish to enable ID Protection",
+				"description": "Enable if you wish to enable ID Protection",
 				"required": false,
 				"default": false
 			},
 			{
 				"name": "coupon",
-				"displayName": "Coupon",
+				"displayName": "Promocode",
 				"type": "string",
 				"description": "Valid promotion code",
 				"required": false,
@@ -430,6 +432,41 @@ export const orderFields: INodeProperties[] = [
 				]
 			}
 		}
+	},
+	{
+		"name": "status",
+		"displayName": "Status",
+		"type": "options",
+		"required": true,
+		"default": "",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"order"
+				],
+				"operation": [
+					"setStatus"
+				]
+			}
+		},
+		"options": [
+			{
+				"name": "Active",
+				"value": "Active"
+			},
+			{
+				"name": "Pending",
+				"value": "Pending"
+			},
+			{
+				"name": "Cancelled",
+				"value": "Cancelled"
+			},
+			{
+				"name": "Fraud",
+				"value": "Fraud"
+			}
+		]
 	},
 	{
 		"name": "id",

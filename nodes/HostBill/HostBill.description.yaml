@@ -123,7 +123,7 @@ resources:
           - name: client_id
             display: Contact ID to Remove
           - name: parent_id
-            displyName: Client ID
+            display: Client ID
             desc: Client main profile ID contact is removed from
 
       getByClient:
@@ -256,41 +256,41 @@ resources:
         spec: https://api.hostbillapp.com/orders/addOrder/
         params:
           - name: client_id
-            displayName: Client ID
+            display: Client ID
             type: number
           - name: confirm
-            displayName: Notify Client
+            display: Notify Client
             type: boolean
             desc: Enable if you wish to notify client about this order
             converter: "ToDo: true -> 1, false -> 0"
           - name: invoice_generate
-            displayName: Set to 1 if you wish to generate invoice for this order
+            display: Generate Invoice
             type: boolean
-            desc: Set to 1 if you wish to generate invoice for this order
+            desc: Enable if you wish to generate invoice for this order
             converter: "ToDo: true -> 1, false -> 0"
           - name: invoice_info
-            displayName: Send Invoice
+            display: Send Invoice
             type: boolean
             desc: Enable if you wish to send invoice generated for this order
             converter: "ToDo: true -> 1, false -> 0"
+          - name: module
+            display: Payment module ID
+            type: number
+            desc: Payment module ID invoice should be generated with
 
           - name: serviceFields
             display: Ordering product/service
             type: collection
             options:
-              - name: module
-                displayName: Payment module ID
-                type: number
-                desc: Payment module ID invoice should be generated with
               - name: product
-                displayName: Service ID
+                display: Service ID
                 type: number
                 desc: Service ID to purchase
               - name: domain_name
-                displayName: Domain Name
+                display: Domain Name
               - $ref: "#/def/fields/cycle"
               - name: coupon
-                displayName: Promocode
+                display: Promocode
                 desc: Valid promotion code
 
           - name: domainFields
@@ -298,44 +298,41 @@ resources:
             type: collection
             desc: Ordering domain registration/transfer
             options:
-              - name: module
-                displayName: Payment module ID
-                type: number
-                desc: Payment module ID invoice should be generated with
               - name: domain_action
-                displayName: Type of Action
+                display: Type of Action
                 type: options
                 options:
                   - register
                   - transfer
               - name: domain_sld
-                displayName: Domain Name
+                display: Domain Name
               - name: domain_period
-                displayName: Number of Years
+                display: Number of Years
                 type: number
               - name: domain_tld
-                displayName: Top-level Domain
+                display: Top-level Domain
                 desc: "Domain tld, e.g.: .com, .org"
               - name: product
-                displayName: Domain product ID
+                display: Domain product ID
                 type: number
                 desc: "Domain product ID - id of product from Domains order page type. Note: domain_tld is the prefered value and will be used if specified."
               - name: domain_dns
-                displayName: Enable DNS Management
+                display: Enable DNS Management
                 type: boolean
-                desc: Set to 1 if you wish to enable DNS Management
-                converter: "ToDo"
+                desc: Enable if you wish to enable DNS Management
+                converter: "ToDo: true -> 1"
               - name: domain_email
-                displayName: Email Forwarding
+                display: Email Forwarding
                 type: boolean
-                desc: Set to 1 if you wish to enable Email Forwarding
-                converter: "ToDo"
+                desc: Enable if you wish to enable Email Forwarding
+                converter: "ToDo: true -> 1"
               - name: domain_idp
-                displayName: ID Protection
+                display: ID Protection
                 type: boolean
-                desc: Set to 1 if you wish to enable ID Protection
+                desc: Enable if you wish to enable ID Protection
+                converter: "ToDo: true -> 1"
               - name: coupon
-                displayName: Promocode
+                display: Promocode
                 desc: Valid promotion code
 
       delete:
@@ -368,6 +365,7 @@ resources:
         spec: http://api.hostbillapp.com/orders/setOrderStatus/
         params:
           - Order.id
+          - Order.status
 
       setActive:
         display: Set Active
@@ -538,8 +536,9 @@ def:
       type: number
     cycle:
       name: cycle
-      displayName: Billing cycle
+      display: Billing cycle
       type: options
+			# ToDo: specify display labels for these abbreviations
       desc: "Allowed values: 'm','q','s','a','b','t','d','w','h' or 'Free' or 'Once' where m-monthly, q-quarterly etc."
       options:
         - name: Monthly
@@ -554,7 +553,7 @@ def:
           value: b
         - name: t
           value: t
-        - name: d - Dayly?
+        - name: d - Daily?
           value: d
         - name: w - Weekly?
           value: w
@@ -625,43 +624,50 @@ models:
     - name: id
       display: Order ID
       type: number
+    - name: status
+      type: options
+      options:
+        - Active
+        - Pending
+        - Cancelled
+        - Fraud
 
   Account:
     - name: id
-      displayName: Account ID
+      display: Account ID
       type: number
     - name: product_id
-      displayName: Product ID
+      display: Product ID
       type: number
     - name: date_created
-      displayName: Creation Date
+      display: Creation Date
       type: dateTime
       desc: Sets account creation date
     - name: domain
-      displayName: Domain/Hostname
+      display: Domain/Hostname
       desc: Sets account domain/hostname
     - name: server_id
-      displayName: Server ID
+      display: Server ID
       type: number
       desc: Sets server (ID) from which this account will be provisoned
     - name: payment_module
-      displayName: Payment Module ID
+      display: Payment Module ID
       type: number
       desc: Sets payment module (ID) for this account
     - name: firstpayment
-      displayName: First Payment
+      display: First Payment
       type: number
       desc: Sets first payment amount
     - name: total
-      displayName: Recurring Amount
+      display: Recurring Amount
       type: number
       desc: Sets recurring amount
     - name: next_due
-      displayName: Next Due
+      display: Next Due
       type: dateTime
       desc: Sets next due date
     - name: status
-      displayName: Status
+      display: Status
       type: options
       desc: Sets account status
       options:
@@ -669,12 +675,12 @@ models:
         - Suspended
         - Terminated
     - name: username
-      displayName: Username
+      display: Username
       desc: Sets username for this account
     - name: password
       desc: Sets password for this account
     - name: rootpassword
-      displayName: Root Password
+      display: Root Password
       desc: Sets root password
     - name: notes
 

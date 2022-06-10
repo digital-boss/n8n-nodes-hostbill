@@ -43,7 +43,7 @@ export const accountFields: INodeProperties[] = [
 	},
 	{
 		"name": "id",
-		"displayName": "Id",
+		"displayName": "Account ID",
 		"type": "number",
 		"required": true,
 		"default": 0,
@@ -60,7 +60,7 @@ export const accountFields: INodeProperties[] = [
 	},
 	{
 		"name": "id",
-		"displayName": "Id",
+		"displayName": "Account ID",
 		"type": "number",
 		"required": true,
 		"default": 0,
@@ -77,7 +77,7 @@ export const accountFields: INodeProperties[] = [
 	},
 	{
 		"name": "id",
-		"displayName": "Id",
+		"displayName": "Account ID",
 		"type": "number",
 		"required": true,
 		"default": 0,
@@ -159,7 +159,7 @@ export const accountFields: INodeProperties[] = [
 	},
 	{
 		"name": "id",
-		"displayName": "Id",
+		"displayName": "Account ID",
 		"type": "number",
 		"required": true,
 		"default": 0,
@@ -193,14 +193,14 @@ export const accountFields: INodeProperties[] = [
 		"options": [
 			{
 				"name": "product_id",
-				"displayName": "Product_id",
+				"displayName": "Product ID",
 				"type": "number",
 				"required": false,
 				"default": 0
 			},
 			{
 				"name": "date_created",
-				"displayName": "Date_created",
+				"displayName": "Creation Date",
 				"type": "dateTime",
 				"description": "Sets account creation date",
 				"required": false,
@@ -208,7 +208,7 @@ export const accountFields: INodeProperties[] = [
 			},
 			{
 				"name": "domain",
-				"displayName": "Domain",
+				"displayName": "Domain/Hostname",
 				"type": "string",
 				"description": "Sets account domain/hostname",
 				"required": false,
@@ -216,7 +216,7 @@ export const accountFields: INodeProperties[] = [
 			},
 			{
 				"name": "server_id",
-				"displayName": "Server_id",
+				"displayName": "Server ID",
 				"type": "number",
 				"description": "Sets server (ID) from which this account will be provisoned",
 				"required": false,
@@ -224,7 +224,7 @@ export const accountFields: INodeProperties[] = [
 			},
 			{
 				"name": "payment_module",
-				"displayName": "Payment_module",
+				"displayName": "Payment Module ID",
 				"type": "number",
 				"description": "Sets payment module (ID) for this account",
 				"required": false,
@@ -232,7 +232,7 @@ export const accountFields: INodeProperties[] = [
 			},
 			{
 				"name": "firstpayment",
-				"displayName": "Firstpayment",
+				"displayName": "First Payment",
 				"type": "number",
 				"description": "Sets first payment amount",
 				"required": false,
@@ -240,7 +240,7 @@ export const accountFields: INodeProperties[] = [
 			},
 			{
 				"name": "total",
-				"displayName": "Total",
+				"displayName": "Recurring Amount",
 				"type": "number",
 				"description": "Sets recurring amount",
 				"required": false,
@@ -248,7 +248,7 @@ export const accountFields: INodeProperties[] = [
 			},
 			{
 				"name": "next_due",
-				"displayName": "Next_due",
+				"displayName": "Next Due",
 				"type": "dateTime",
 				"description": "Sets next due date",
 				"required": false,
@@ -294,7 +294,7 @@ export const accountFields: INodeProperties[] = [
 			},
 			{
 				"name": "rootpassword",
-				"displayName": "Rootpassword",
+				"displayName": "Root Password",
 				"type": "string",
 				"description": "Sets root password",
 				"required": false,
@@ -371,7 +371,7 @@ export const accountFields: INodeProperties[] = [
 			},
 			{
 				"name": "cycle",
-				"displayName": "Cycle",
+				"displayName": "Billing cycle",
 				"type": "options",
 				"description": "Allowed values: 'm','q','s','a','b','t','d','w','h' or 'Free' or 'Once' where m-monthly, q-quarterly etc.",
 				"required": false,
@@ -402,7 +402,7 @@ export const accountFields: INodeProperties[] = [
 						"value": "t"
 					},
 					{
-						"name": "d - Dayly?",
+						"name": "d - Daily?",
 						"value": "d"
 					},
 					{
