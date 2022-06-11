@@ -6,6 +6,7 @@ import {
 
 export interface HostBillApiCredentials {
 	server: string;
+	apiId: string;
 	apiKey: string;
 }
 
@@ -15,13 +16,19 @@ export class HostBillApi implements ICredentialType {
 	documentationUrl = 'hostBill';
 	properties: INodeProperties[] = [
 		{
-			displayName: 'iBILL Server',
+			displayName: 'HostBill Server',
 			name: 'server',
 			type: 'string',
 			default: 'http://api.hostbillapp.com',
 		},
 		{
-			displayName: 'iBILL API Key',
+			displayName: 'HostBill API ID',
+			name: 'apiId',
+			type: 'string',
+			default: '',
+		},
+		{
+			displayName: 'HostBill API Key',
 			name: 'apiKey',
 			type: 'string',
 			typeOptions: {
