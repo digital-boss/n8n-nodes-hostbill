@@ -166,7 +166,6 @@ export const orderFields: INodeProperties[] = [
 				"name": "cycle",
 				"displayName": "Billing cycle",
 				"type": "options",
-				"description": "Allowed values: 'm','q','s','a','b','t','d','w','h' or 'Free' or 'Once' where m-monthly, q-quarterly etc.",
 				"required": false,
 				"default": "",
 				"options": [
@@ -179,15 +178,15 @@ export const orderFields: INodeProperties[] = [
 						"value": "q"
 					},
 					{
-						"name": "s",
+						"name": "Semi Annualy (2 in a year)",
 						"value": "s"
 					},
 					{
-						"name": "a",
+						"name": "Annually",
 						"value": "a"
 					},
 					{
-						"name": "b",
+						"name": "Bi-Monthly",
 						"value": "b"
 					},
 					{
@@ -195,15 +194,15 @@ export const orderFields: INodeProperties[] = [
 						"value": "t"
 					},
 					{
-						"name": "d - Daily?",
+						"name": "Daily",
 						"value": "d"
 					},
 					{
-						"name": "w - Weekly?",
+						"name": "Weekly",
 						"value": "w"
 					},
 					{
-						"name": "h - Hourly?",
+						"name": "Hourly",
 						"value": "h"
 					},
 					{

@@ -234,15 +234,24 @@ const getJsModule = (json: any, name: string): string => {
 	const type = name === 'resources' ? 'INodeProperties' : 'INodeProperties[]';
 	return `import { INodeProperties } from "n8n-workflow";
 
-export const ${name}: ${type} = ${str}`;
+export const ${name}: ${type} = ${str}\n`;
+};
+
+const getJsModuleForNode = (json: any): string => {
+	const str = JSON.stringify(json, undefined, "\t");
+	return `import { INode } from '../../../generator/compactTypes';
+
+export const nodeDescr: INode = ${str}\n`;
 };
 
 const process = (node: INode) => {
+	fs.writeFileSync(`${outDir}/source.json`, JSON.stringify(node, undefined, 2), 'utf-8');
+
 	const normNode = normalizeNodeDesc(node);
 	const descriptionsDict = generateDescriptions(normNode);
 
-	fs.writeFileSync(`${outDir}/norm.json`, JSON.stringify(normNode, undefined, 2), 'utf-8');
-	fs.writeFileSync(`${outDir}/norm.yaml`, toYaml(normNode), 'utf-8');
+	fs.writeFileSync(`${outDir}/nodeDescr.ts`, getJsModuleForNode(normNode));
+	fs.writeFileSync(`${outDir}/nodeDescr.yaml`, toYaml(normNode), 'utf-8');
 
 	Object.keys(descriptionsDict).map(key => {
 		const props = descriptionsDict[key];

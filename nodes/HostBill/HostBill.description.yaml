@@ -1,23 +1,3 @@
-transformers:
-  - query: "ToDo: all operations"
-    namespace: operations
-    methods:
-      - addHttpMethod # All operations use GET method
-      - addPath # Add path for operations
-  - query: "ToDo: options of options type"
-    methods:
-      - normalizeOptions
-  - query: "ToDo: all params"
-    namespace: params
-    methods:
-      - paramsFromModel # add params from Models
-      - addRequired # Parameters are required by default
-      - addType # Default type is string
-      - addDefault
-      - adddisplay
-  - query: "ToDo: Normalize params with options type"
-
-
 resources:
   client:
     defaultOperation: getAll
@@ -25,8 +5,8 @@ resources:
       create:
         spec: http://api.hostbillapp.com/clients/addClient/
         responseMap:
-					- client_id
-					- info
+          - client_id
+          - info
         params:
           - Contact.firstname
           - Contact.lastname
@@ -54,7 +34,7 @@ resources:
       delete:
         spec: http://api.hostbillapp.com/clients/deleteClient/
         responseMap:
-					- info
+          - info
         params:
           - Client.id
       get:
@@ -78,7 +58,7 @@ resources:
       update:
         spec: http://api.hostbillapp.com/clients/setClientDetails/
         responseMap:
-					- info
+          - info
         params:
           - Client.id
           - name: optionalFields
@@ -99,7 +79,7 @@ resources:
         display: Verify Login
         spec: https://api.hostbillapp.com/clients/verifyClientLogin/
         responseMap:
-					- client_id
+          - client_id
         params:
           - name: email
           - name: password
@@ -111,7 +91,7 @@ resources:
       create:
         spec: http://api.hostbillapp.com/clients/addClientContact/
         responseMap:
-					- contact_id
+          - contact_id
         params:
           - Client.id
           - Contact.firstname
@@ -134,7 +114,7 @@ resources:
       delete:
         spec: http://api.hostbillapp.com/clients/deleteClientContact/
         responseMap:
-					- info
+          - info
         params:
           - name: client_id
             display: Contact ID to Remove
@@ -153,7 +133,7 @@ resources:
       update:
         spec: http://api.hostbillapp.com/clients/setContactDetails/
         responseMap:
-					- info
+          - info
         params:
           - Contact.id
           - name: Optional Fields
@@ -174,10 +154,10 @@ resources:
     defaultOperation: getAll
     operations:
       create:
-        # GET /admin/api.php?token=:TOKEN&call=addInvoice&client_id=:CLIENT_ID ToDos
+        # GET /admin/api.php?token=:TOKEN&call=addInvoice&client_id=:CLIENT_ID ToDo
         spec: https://api.hostbillapp.com/invoices/addInvoice/
         responseMap:
-				  - invoice_id
+          - invoice_id
         params:
           - name: client_id
             display: Client ID
@@ -202,13 +182,13 @@ resources:
           - name: tax
             display: Item is Taxed
             type: boolean
-            map: "ToDo: true -> 1, false -> 0"
+            map: boolOneZero
 
       addPayment:
         display: Add Payment
         spec: https://api.hostbillapp.com/invoices/addInvoicePayment/
         responseMap:
-					- info
+          - info
         params:
           - Invoice.id
           - name: amount
@@ -241,7 +221,7 @@ resources:
         display: Set Status
         spec: https://api.hostbillapp.com/invoices/setInvoiceStatus/
         responseMap:
-					- info
+          - info
         params:
           - Invoice.id
           - name: status
@@ -254,15 +234,15 @@ resources:
       delete:
         spec: https://api.hostbillapp.com/invoices/deleteInvoice/
         responseMap:
-					- info
+          - info
         params:
           - Invoice.id
 
       get:
         spec: https://api.hostbillapp.com/invoices/getInvoiceDetails/
         responseMap:
-					- invoice
-					- transactions
+          - invoice
+          - transactions
         params:
           - Invoice.id
 
@@ -288,8 +268,8 @@ resources:
       create:
         spec: https://api.hostbillapp.com/orders/addOrder/
         responseMap:
-					- order_id
-					- info
+          - order_id
+          - info
         params:
           - name: client_id
             display: Client ID
@@ -298,17 +278,17 @@ resources:
             display: Notify Client
             type: boolean
             desc: Enable if you wish to notify client about this order
-            map: "ToDo: true -> 1, false -> 0"
+            map: boolOne
           - name: invoice_generate
             display: Generate Invoice
             type: boolean
             desc: Enable if you wish to generate invoice for this order
-            map: "ToDo: true -> 1, false -> 0"
+            map: boolOne
           - name: invoice_info
             display: Send Invoice
             type: boolean
             desc: Enable if you wish to send invoice generated for this order
-            map: "ToDo: true -> 1, false -> 0"
+            map: boolOne
           - name: module
             display: Payment module ID
             type: number
@@ -356,17 +336,17 @@ resources:
                 display: Enable DNS Management
                 type: boolean
                 desc: Enable if you wish to enable DNS Management
-                map: "ToDo: true -> 1"
+                map: boolOne
               - name: domain_email
                 display: Email Forwarding
                 type: boolean
                 desc: Enable if you wish to enable Email Forwarding
-                map: "ToDo: true -> 1"
+                map: boolOne
               - name: domain_idp
                 display: ID Protection
                 type: boolean
                 desc: Enable if you wish to enable ID Protection
-                map: "ToDo: true -> 1"
+                map: boolOne
               - name: coupon
                 display: Promocode
                 desc: Valid promotion code
@@ -374,7 +354,7 @@ resources:
       delete:
         spec: http://api.hostbillapp.com/orders/deleteOrder/
         responseMap:
-					- info
+          - info
         params:
           - Order.id
 
@@ -404,7 +384,7 @@ resources:
         display: Set Status
         spec: http://api.hostbillapp.com/orders/setOrderStatus/
         responseMap:
-					- info
+          - info
         params:
           - Order.id
           - Order.status
@@ -413,8 +393,8 @@ resources:
         display: Set Active
         spec: http://api.hostbillapp.com/orders/setOrderActive/
         responseMap:
-					- id
-					- info
+          - id
+          - info
         params:
           - Order.id
 
@@ -424,14 +404,14 @@ resources:
       create:
         spec: http://api.hostbillapp.com/accounts/accountCreate/
         responseMap:
-					- info
+          - info
         params:
           - Account.id
 
       delete:
         spec: http://api.hostbillapp.com/accounts/accountTerminate/
         responseMap:
-					- info
+          - info
         params:
           - Account.id
 
@@ -469,7 +449,7 @@ resources:
       update:
         spec: http://api.hostbillapp.com/accounts/editAccountDetails/
         responseMap:
-					- info
+          - info
         params:
           - Account.id
           - name: optionalFields
@@ -494,8 +474,8 @@ resources:
         display: Add Addon
         spec: https://api.hostbillapp.com/accounts/addAddonToAccount/
         responseMap:
-					- newaddon
-					- info
+          - newaddon
+          - info
         params:
           - name: account_id
             display: Account ID
@@ -511,7 +491,7 @@ resources:
               - name: invoice
                 type: boolean
                 desc: Set to true if invoice for adding this addon should be generated
-                map: "ToDo: true -> true"
+                map: boolTrue
               - $ref: "#/def/fields/cycle"
               - name: payment_module
                 display: Payment Gateway ID
@@ -545,32 +525,32 @@ resources:
       register:
         spec: http://api.hostbillapp.com/domains/domainRegister/
         responseMap:
-					- info
+          - info
         params:
           - Domain.id
       transfer:
         spec: http://api.hostbillapp.com/domains/domainTransfer/
         responseMap:
-					- info
+          - info
         params:
           - Domain.id
       renew:
         spec: http://api.hostbillapp.com/domains/domainRenew/
         responseMap:
-					- info
+          - info
         params:
           - Domain.id
       delete:
         # GET /admin/api.php?token=:TOKEN&call=domainDelete&id=:ID ToDo
         spec: http://api.hostbillapp.com/domains/domainDelete/
         responseMap:
-					- info
+          - info
         params:
           - Domain.id
       epp:
         spec: http://api.hostbillapp.com/domains/domainEPP/
         responseMap:
-					- EppCode
+          - EppCode
         params:
           - Domain.id
       get:
@@ -609,26 +589,24 @@ def:
       name: cycle
       display: Billing cycle
       type: options
-      # ToDo: specify display labels for these abbreviations
-      desc: "Allowed values: 'm','q','s','a','b','t','d','w','h' or 'Free' or 'Once' where m-monthly, q-quarterly etc."
       options:
         - name: Monthly
           value: m
         - name: Quarterly
           value: q
-        - name: s
+        - name: Semi Annualy (2 in a year)
           value: s
-        - name: a
+        - name: Annually
           value: a
-        - name: b
+        - name: Bi-Monthly
           value: b
         - name: t
           value: t
-        - name: d - Daily?
+        - name: Daily
           value: d
-        - name: w - Weekly?
+        - name: Weekly
           value: w
-        - name: h - Hourly?
+        - name: Hourly
           value: h
         - name: Free
           value: Free
@@ -645,7 +623,7 @@ models:
       display: Notify Client
       desc: Enable if you wish to send customer his login details
       type: boolean
-      map: "ToDo: true -> yes"
+      map: boolYes
     - name: type
       desc: Client type - Private or Company values allowed here
       type: options

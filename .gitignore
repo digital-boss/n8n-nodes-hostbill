@@ -7,3 +7,5 @@ npm-debug.log*
 yarn.lock
 .idea
 .vscode
+nodes/HostBill/descriptions/source.json
+nodes/HostBill/descriptions/nodeDescr.yaml

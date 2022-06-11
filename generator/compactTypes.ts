@@ -14,7 +14,8 @@ export interface IParam {
 	type?: NodePropertyTypes;
 	desc?: string;
 	required?: boolean;
-	default?: string;
+	default?: string | number | boolean | Array<string | number | boolean>;
+	map?: string;
 	options?: Param[] | Option[];
 }
 
@@ -28,6 +29,7 @@ export interface IOperation {
 	desc?: string;
 	path?: string;
 	method?: string;
+	responseMap?: string | string[];
 }
 
 export interface IOperations {[name: string]: IOperation;}
