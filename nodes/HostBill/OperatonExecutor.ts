@@ -16,6 +16,8 @@ import { INode, IOperation, IParam } from '../../generator/compactTypes';
 
 export type Mappers = {[mapper: string]: (value: any) => string | undefined};
 
+type Dict<T=any> = {[key: string]: T};
+
 const normalizeHost = (hostName: string) => hostName.replace(/\/$/, '');
 
 const pick = (obj: any, props: string[]) => props.reduce((acc, i) => {
@@ -70,7 +72,7 @@ export class OperationExecutor {
 		return value;
 	}
 
-	getParams = (): Array<[string, string]> => {
+	getParams = (): Dict<string> => {
 		const params = this.operation.params as IParam[];
 
 		const primaryParams = params.filter(i => i.type !== 'collection');
@@ -94,19 +96,24 @@ export class OperationExecutor {
 
 		return Array.prototype
 			.concat(primaryValues, collectionsValues)
-			.filter(([_, value]) => value !== undefined);
+			.filter(([_, value]) => value !== undefined)
+			.reduce((acc, [key, value]) => {
+				acc[key] = value;
+				return acc;
+			}, {} as Dict<string>);
 	}
 
-	protected buildRequest = (params: Array<[string, string]>, call: string): OptionsWithUri => {
+	protected buildRequest = (params: Dict<string>, call: string): OptionsWithUri => {
+		const credParams: Dict<string> = {
+			'api_id': this.credentials.apiId,
+			'api_key': this.credentials.apiKey,
+			'call': call,
+		};
 		return {
 			method: 'GET',
 			uri: normalizeHost(this.credentials.server) + '/admin/api.php',
 			json: true,
-			qs: [
-				['api_id', this.credentials.apiId],
-				['api_key', this.credentials.apiKey],
-				['call', call],
-			].concat(params),
+			qs: Object.assign(credParams, params),
 		};
 	}
 
