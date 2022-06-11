@@ -24,6 +24,9 @@ resources:
     operations:
       create:
         spec: http://api.hostbillapp.com/clients/addClient/
+        responseMap:
+					- client_id
+					- info
         params:
           - Contact.firstname
           - Contact.lastname
@@ -50,25 +53,32 @@ resources:
 
       delete:
         spec: http://api.hostbillapp.com/clients/deleteClient/
+        responseMap:
+					- info
         params:
           - Client.id
       get:
         spec: http://api.hostbillapp.com/clients/getClientDetails/
+        responseMap: client
         params:
           - Client.id
       getAll:
         display: Get All
         spec: http://api.hostbillapp.com/clients/getClients/
+        responseMap: clients
         params:
           - $ref: "#/def/fields/page"
       getDomains:
         display: Get Domains
         spec: https://api.hostbillapp.com/clients/getClientDomains/
+        responseMap: domains
         params:
           - Client.id
           - $ref: "#/def/fields/page"
       update:
         spec: http://api.hostbillapp.com/clients/setClientDetails/
+        responseMap:
+					- info
         params:
           - Client.id
           - name: optionalFields
@@ -88,6 +98,8 @@ resources:
       verifyLogin:
         display: Verify Login
         spec: https://api.hostbillapp.com/clients/verifyClientLogin/
+        responseMap:
+					- client_id
         params:
           - name: email
           - name: password
@@ -98,6 +110,8 @@ resources:
     operations:
       create:
         spec: http://api.hostbillapp.com/clients/addClientContact/
+        responseMap:
+					- contact_id
         params:
           - Client.id
           - Contact.firstname
@@ -119,6 +133,8 @@ resources:
 
       delete:
         spec: http://api.hostbillapp.com/clients/deleteClientContact/
+        responseMap:
+					- info
         params:
           - name: client_id
             display: Contact ID to Remove
@@ -129,12 +145,15 @@ resources:
       getByClient:
         display: Get by Client
         spec: http://api.hostbillapp.com/clients/getClientContacts/
+        responseMap: contacts
         params:
           - Client.id
           - $ref: "#/def/fields/page"
 
       update:
         spec: http://api.hostbillapp.com/clients/setContactDetails/
+        responseMap:
+					- info
         params:
           - Contact.id
           - name: Optional Fields
@@ -157,6 +176,8 @@ resources:
       create:
         # GET /admin/api.php?token=:TOKEN&call=addInvoice&client_id=:CLIENT_ID ToDos
         spec: https://api.hostbillapp.com/invoices/addInvoice/
+        responseMap:
+				  - invoice_id
         params:
           - name: client_id
             display: Client ID
@@ -166,6 +187,7 @@ resources:
       addItem:
         display: Add Item
         spec: https://api.hostbillapp.com/invoices/addInvoiceItem/
+        responseMap: newline
         params:
           - Invoice.id
           - name: line
@@ -185,6 +207,8 @@ resources:
       addPayment:
         display: Add Payment
         spec: https://api.hostbillapp.com/invoices/addInvoicePayment/
+        responseMap:
+					- info
         params:
           - Invoice.id
           - name: amount
@@ -216,6 +240,8 @@ resources:
       setStatus:
         display: Set Status
         spec: https://api.hostbillapp.com/invoices/setInvoiceStatus/
+        responseMap:
+					- info
         params:
           - Invoice.id
           - name: status
@@ -227,17 +253,23 @@ resources:
 
       delete:
         spec: https://api.hostbillapp.com/invoices/deleteInvoice/
+        responseMap:
+					- info
         params:
           - Invoice.id
 
       get:
         spec: https://api.hostbillapp.com/invoices/getInvoiceDetails/
+        responseMap:
+					- invoice
+					- transactions
         params:
           - Invoice.id
 
       getAll:
         display: Get All
         spec: https://api.hostbillapp.com/invoices/getInvoices/
+        responseMap: invoices
         params:
           - $ref: "#/def/fields/page"
           - name: list
@@ -255,6 +287,9 @@ resources:
     operations:
       create:
         spec: https://api.hostbillapp.com/orders/addOrder/
+        responseMap:
+					- order_id
+					- info
         params:
           - name: client_id
             display: Client ID
@@ -338,17 +373,21 @@ resources:
 
       delete:
         spec: http://api.hostbillapp.com/orders/deleteOrder/
+        responseMap:
+					- info
         params:
           - Order.id
 
       get:
         spec: http://api.hostbillapp.com/orders/getOrderDetails/
+        responseMap: details
         params:
           - Order.id
 
       getAll:
         display: Get All
         spec: http://api.hostbillapp.com/orders/getOrders/
+        responseMap: orders
         params:
           - $ref: "#/def/fields/page"
           - name: list
@@ -364,6 +403,8 @@ resources:
       setStatus:
         display: Set Status
         spec: http://api.hostbillapp.com/orders/setOrderStatus/
+        responseMap:
+					- info
         params:
           - Order.id
           - Order.status
@@ -371,6 +412,9 @@ resources:
       setActive:
         display: Set Active
         spec: http://api.hostbillapp.com/orders/setOrderActive/
+        responseMap:
+					- id
+					- info
         params:
           - Order.id
 
@@ -379,22 +423,28 @@ resources:
     operations:
       create:
         spec: http://api.hostbillapp.com/accounts/accountCreate/
+        responseMap:
+					- info
         params:
           - Account.id
 
       delete:
         spec: http://api.hostbillapp.com/accounts/accountTerminate/
+        responseMap:
+					- info
         params:
           - Account.id
 
       get:
         spec: http://api.hostbillapp.com/accounts/getAccountDetails/
+        responseMap: details
         params:
           - Account.id
 
       getAll:
         display: Get All
         spec: http://api.hostbillapp.com/accounts/getAccounts/
+        responseMap: accounts
         params:
           - $ref: "#/def/fields/page"
           - name: list
@@ -418,6 +468,8 @@ resources:
 
       update:
         spec: http://api.hostbillapp.com/accounts/editAccountDetails/
+        responseMap:
+					- info
         params:
           - Account.id
           - name: optionalFields
@@ -441,6 +493,9 @@ resources:
       addAddon:
         display: Add Addon
         spec: https://api.hostbillapp.com/accounts/addAddonToAccount/
+        responseMap:
+					- newaddon
+					- info
         params:
           - name: account_id
             display: Account ID
@@ -469,6 +524,7 @@ resources:
       getProductDetails:
         display: Get Product Details
         spec: http://api.hostbillapp.com/services/getProductDetails/
+        responseMap: product
         params:
           - name: id
             display: Product ID
@@ -477,6 +533,7 @@ resources:
       getProducts:
         display: Get Products
         spec: http://api.hostbillapp.com/services/getProducts/
+        responseMap: products
         params:
           - name: id
             display: Orderpage ID
@@ -487,32 +544,44 @@ resources:
     operations:
       register:
         spec: http://api.hostbillapp.com/domains/domainRegister/
+        responseMap:
+					- info
         params:
           - Domain.id
       transfer:
         spec: http://api.hostbillapp.com/domains/domainTransfer/
+        responseMap:
+					- info
         params:
           - Domain.id
       renew:
         spec: http://api.hostbillapp.com/domains/domainRenew/
+        responseMap:
+					- info
         params:
           - Domain.id
       delete:
         # GET /admin/api.php?token=:TOKEN&call=domainDelete&id=:ID ToDo
         spec: http://api.hostbillapp.com/domains/domainDelete/
+        responseMap:
+					- info
         params:
           - Domain.id
       epp:
         spec: http://api.hostbillapp.com/domains/domainEPP/
+        responseMap:
+					- EppCode
         params:
           - Domain.id
       get:
         spec: http://api.hostbillapp.com/domains/getDomainDetails/
+        responseMap: details
         params:
           - Domain.id
       getAll:
         display: Get All
         spec: http://api.hostbillapp.com/domains/getDomains/
+        responseMap: domains
         params:
           - $ref: "#/def/fields/page"
           - name: list
