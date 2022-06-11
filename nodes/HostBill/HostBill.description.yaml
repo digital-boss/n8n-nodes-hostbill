@@ -155,6 +155,7 @@ resources:
     defaultOperation: getAll
     operations:
       create:
+        # GET /admin/api.php?token=:TOKEN&call=addInvoice&client_id=:CLIENT_ID ToDos
         spec: https://api.hostbillapp.com/invoices/addInvoice/
         params:
           - name: client_id
@@ -179,7 +180,7 @@ resources:
           - name: tax
             display: Item is Taxed
             type: boolean
-            converter: "ToDo: true -> 1, false -> 0"
+            map: "ToDo: true -> 1, false -> 0"
 
       addPayment:
         display: Add Payment
@@ -262,17 +263,17 @@ resources:
             display: Notify Client
             type: boolean
             desc: Enable if you wish to notify client about this order
-            converter: "ToDo: true -> 1, false -> 0"
+            map: "ToDo: true -> 1, false -> 0"
           - name: invoice_generate
             display: Generate Invoice
             type: boolean
             desc: Enable if you wish to generate invoice for this order
-            converter: "ToDo: true -> 1, false -> 0"
+            map: "ToDo: true -> 1, false -> 0"
           - name: invoice_info
             display: Send Invoice
             type: boolean
             desc: Enable if you wish to send invoice generated for this order
-            converter: "ToDo: true -> 1, false -> 0"
+            map: "ToDo: true -> 1, false -> 0"
           - name: module
             display: Payment module ID
             type: number
@@ -320,17 +321,17 @@ resources:
                 display: Enable DNS Management
                 type: boolean
                 desc: Enable if you wish to enable DNS Management
-                converter: "ToDo: true -> 1"
+                map: "ToDo: true -> 1"
               - name: domain_email
                 display: Email Forwarding
                 type: boolean
                 desc: Enable if you wish to enable Email Forwarding
-                converter: "ToDo: true -> 1"
+                map: "ToDo: true -> 1"
               - name: domain_idp
                 display: ID Protection
                 type: boolean
                 desc: Enable if you wish to enable ID Protection
-                converter: "ToDo: true -> 1"
+                map: "ToDo: true -> 1"
               - name: coupon
                 display: Promocode
                 desc: Valid promotion code
@@ -455,7 +456,7 @@ resources:
               - name: invoice
                 type: boolean
                 desc: Set to true if invoice for adding this addon should be generated
-                converter: "ToDo"
+                map: "ToDo: true -> true"
               - $ref: "#/def/fields/cycle"
               - name: payment_module
                 display: Payment Gateway ID
@@ -497,6 +498,7 @@ resources:
         params:
           - Domain.id
       delete:
+        # GET /admin/api.php?token=:TOKEN&call=domainDelete&id=:ID ToDo
         spec: http://api.hostbillapp.com/domains/domainDelete/
         params:
           - Domain.id
@@ -538,7 +540,7 @@ def:
       name: cycle
       display: Billing cycle
       type: options
-			# ToDo: specify display labels for these abbreviations
+      # ToDo: specify display labels for these abbreviations
       desc: "Allowed values: 'm','q','s','a','b','t','d','w','h' or 'Free' or 'Once' where m-monthly, q-quarterly etc."
       options:
         - name: Monthly
@@ -574,7 +576,7 @@ models:
       display: Notify Client
       desc: Enable if you wish to send customer his login details
       type: boolean
-      converter: "ToDo: true -> yes, false -> no"
+      map: "ToDo: true -> yes"
     - name: type
       desc: Client type - Private or Company values allowed here
       type: options
