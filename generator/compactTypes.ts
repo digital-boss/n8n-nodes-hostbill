@@ -5,6 +5,7 @@ export type Option = IOption | string;
 export interface IOption {
 	name?: string;
 	value: string;
+	desc?: string;
 }
 
 // ToDo: use here original INodeProperties

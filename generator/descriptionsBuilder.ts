@@ -50,7 +50,7 @@ const mapOption = (opt: IOption): INodePropertyOptions => {
 	return {
 		name: opt.name,
 		value: opt.value,
-		// ToDo: add description
+		description: opt.desc,
 	};
 };
 
