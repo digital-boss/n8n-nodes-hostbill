@@ -13,13 +13,15 @@ import {
 
 import {
 	OperationExecutor,
-} from './GenericFunctions';
+} from './OperatonExecutor';
 
 import { version } from '../version';
 import { HostBillApiCredentials } from '../../credentials/HostBillApi.credentials';
-import { resourceTypes } from './Resources';
 import { hostBillApiTest } from './HostBillApiTest';
+import { accountFields, clientContactFields, clientFields, domainFields, invoiceFields, orderFields, resources, serviceFields } from './descriptions';
 
+import { nodeDescr } from './descriptions/nodeDescr';
+import { requestParamsMappers } from './mappers';
 
 export class HostBill implements INodeType {
 	description: INodeTypeDescription = {
@@ -44,40 +46,14 @@ export class HostBill implements INodeType {
 			},
 		],
 		properties: [
-			{
-				displayName: 'Resource',
-				name: 'resource',
-				type: 'options',
-				noDataExpression: true,
-				options: [
-					{
-						name: 'Client',
-						value: 'client',
-					},
-					{
-						name: 'Billing',
-						value: 'billing',
-					},
-					{
-						name: 'Order',
-						value: 'order',
-					},
-					{
-						name: 'Account',
-						value: 'account',
-					},
-					{
-						name: 'Service',
-						value: 'service',
-					},
-					{
-						name: 'Domain',
-						value: 'domain',
-					},
-				],
-				default: 'customer',
-			},
-			// fields
+			resources,
+			...accountFields,
+			...clientContactFields,
+			...clientFields,
+			...domainFields,
+			...invoiceFields,
+			...orderFields,
+			...serviceFields,
 		],
 	};
 
@@ -98,7 +74,7 @@ export class HostBill implements INodeType {
 
 		let operation: OperationExecutor;
 		try {
-			operation = new OperationExecutor(resourceTypes, resource, operationName, this, credentials);
+			operation = new OperationExecutor(nodeDescr, requestParamsMappers, resource, operationName, this, credentials);
 		} catch (error) {
 			throw new NodeOperationError(this.getNode(), error);
 		}

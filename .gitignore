@@ -4,6 +4,8 @@ node_modules
 tmp
 dist
 npm-debug.log*
-package-lock.json
 yarn.lock
 .idea
+.vscode
+nodes/HostBill/descriptions/source.json
+nodes/HostBill/descriptions/nodeDescr.yaml
