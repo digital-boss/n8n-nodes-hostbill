@@ -12,7 +12,7 @@ import {
 import { HostBillApiCredentials } from '../../credentials/HostBillApi.credentials';
 
 export async function hostBillApiTest(this: ICredentialTestFunctions, credentials: ICredentialsDecrypted): Promise<INodeCredentialTestResult> {
-	// ToDo: How to test credentials?
+	// ToDo: Replace with some endpoint call to check credentials
 	return {
 		status: 'OK',
 		message: 'Authentication successful!',
