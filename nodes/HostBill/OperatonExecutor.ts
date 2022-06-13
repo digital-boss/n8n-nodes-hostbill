@@ -14,15 +14,18 @@ import { IDataObject, NodeApiError, NodeOperationError } from 'n8n-workflow';
 import { HostBillApiCredentials } from '../../credentials/HostBillApi.credentials';
 import { INode, IOperation, IParam } from '../../generator/compactTypes';
 
+// tslint:disable-next-line: no-any
 export type Mappers = {[mapper: string]: (value: any) => string | undefined};
 
-type Dict<T=any> = {[key: string]: T};
+type Dict<T> = {[key: string]: T};
 
 const normalizeHost = (hostName: string) => hostName.replace(/\/$/, '');
 
+// tslint:disable-next-line: no-any
 const pick = (obj: any, props: string[]) => props.reduce((acc, i) => {
 	acc[i] = obj[i];
 	return acc;
+// tslint:disable-next-line: no-any
 }, {} as any);
 
 export class OperationExecutor {
@@ -55,6 +58,7 @@ export class OperationExecutor {
 		this.operation = this.nodeDescr.resources[this.resourceName].operations[this.operationName];
 	}
 
+	// tslint:disable-next-line: no-any
 	mapValue = (mapName: string, value: any): string | undefined => {
 		const mapFn = this.reqMappers[mapName];
 		if (mapFn !== undefined) {
@@ -64,6 +68,7 @@ export class OperationExecutor {
 		}
 	}
 
+	// tslint:disable-next-line: no-any
 	getParamValue = (param: IParam): any => {
 		const value = this.execFns.getNodeParameter(param.name, this.indexItem) as unknown;
 		if (param.map) {
@@ -81,6 +86,7 @@ export class OperationExecutor {
 		const primaryValues: Array<[string, string?]> = primaryParams.map(p => [p.name, this.getParamValue(p)]);
 
 		const collectionsValues: Array<[string, string?]> = collectParams.map(i => {
+			// tslint:disable-next-line: no-any
 			const dict = this.getParamValue(i) as {[key: string]: any};
 			return Object.keys(dict).map(key => {
 				const p = params.find(i => i.name === key);
@@ -123,14 +129,17 @@ export class OperationExecutor {
 			return undefined;
 		}
 		else if (typeof requestMap === 'string') {
+			// tslint:disable-next-line: no-any
 			return (res: any) => res[requestMap];
 		} else if (requestMap instanceof Array) {
+			// tslint:disable-next-line: no-any
 			return (res: any) => pick(res, requestMap);
 		} else {
 			throw new NodeOperationError(this.execFns.getNode(), `Invalid responceMap type for operation ${this.operationName}.`);
 		}
 	}
 
+	// tslint:disable-next-line: no-any
 	protected strip = (transformer?: (res: any) => any) => (res: any) => {
 		if (res.success) {
 			return transformer ? transformer(res) : res;
@@ -139,6 +148,7 @@ export class OperationExecutor {
 		}
 	}
 
+	// tslint:disable-next-line: no-any
 	execute = async (indexItem: number): Promise<any> => {
 		this.indexItem = indexItem;
 		const [_, call] = this.operation.path!.split('/');
