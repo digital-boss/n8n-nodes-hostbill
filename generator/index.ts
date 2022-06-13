@@ -232,14 +232,18 @@ const outDir = 'nodes/HostBill/descriptions';
 const getJsModule = (json: any, name: string): string => {
 	const str = JSON.stringify(json, undefined, "\t");
 	const type = name === 'resources' ? 'INodeProperties' : 'INodeProperties[]';
-	return `import { INodeProperties } from "n8n-workflow";
+	return `// This code was generated. Therefore do not edit it directly.
+
+import { INodeProperties } from "n8n-workflow";
 
 export const ${name}: ${type} = ${str}\n`;
 };
 
 const getJsModuleForNode = (json: any): string => {
 	const str = JSON.stringify(json, undefined, "\t");
-	return `import { INode } from '../../../generator/compactTypes';
+	return `// This code was generated. Therefore do not edit it directly.
+
+import { INode } from '../../../generator/compactTypes';
 
 export const nodeDescr: INode = ${str}\n`;
 };
