@@ -77,17 +77,30 @@ export class OperationExecutor {
 		return value;
 	}
 
-	getParams = (): Dict<string> => {
+	// tslint:disable-next-line: no-any
+	formatPrivileges = (dict: Dict<number>): any => {
+		return Object.keys(dict).reduce((acc, item) => {
+			const [category, priv] = item.split('_');
+			acc[category] = acc[category] ? acc[category] : {};
+			acc[category][priv] = dict[item];
+			return acc;
+		// tslint:disable-next-line: no-any
+		}, {} as any);
+	}
+
+	// tslint:disable-next-line: no-any
+	getCollectionParams = (collectionParam: IParam): Array<[string, any?]> => {
+		if (collectionParam.type !== 'collection') {
+			throw new NodeOperationError(this.execFns.getNode(), `Invalid param type '${collectionParam.type}'. Expected collection.`);
+		}
+
 		const params = this.operation.params as IParam[];
+		// tslint:disable-next-line: no-any
+		const dict = this.getParamValue(collectionParam) as {[key: string]: any};
 
-		const primaryParams = params.filter(i => i.type !== 'collection');
-		const collectParams = params.filter(i => i.type === 'collection');
-
-		const primaryValues: Array<[string, string?]> = primaryParams.map(p => [p.name, this.getParamValue(p)]);
-
-		const collectionsValues: Array<[string, string?]> = collectParams.map(i => {
-			// tslint:disable-next-line: no-any
-			const dict = this.getParamValue(i) as {[key: string]: any};
+		if (collectionParam.name === 'privileges') {
+			return [[collectionParam.name, this.formatPrivileges(dict)]];
+		} else {
 			return Object.keys(dict).map(key => {
 				const p = params.find(i => i.name === key);
 				const value = dict[key];
@@ -97,8 +110,19 @@ export class OperationExecutor {
 				const result: [string, string?] = [key, mappedValue];
 				return result;
 			});
-		})
-		.flat();
+		}
+	}
+
+	// tslint:disable-next-line: no-any
+	getParams = (): Dict<any> => {
+		const params = this.operation.params as IParam[];
+
+		const primaryParams = params.filter(i => i.type !== 'collection');
+		const collectParams = params.filter(i => i.type === 'collection');
+
+		const primaryValues: Array<[string, string?]> = primaryParams.map(p => [p.name, this.getParamValue(p)]);
+		// tslint:disable-next-line: no-any
+		const collectionsValues: Array<[string, any?]> = collectParams.map(this.getCollectionParams).flat();
 
 		return Array.prototype
 			.concat(primaryValues, collectionsValues)

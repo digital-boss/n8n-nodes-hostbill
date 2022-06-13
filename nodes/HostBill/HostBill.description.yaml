@@ -29,7 +29,7 @@ resources:
               - Contact.state
               - Contact.postcode
               - Contact.country
-              # ToDo: add priveleges
+          - Contact.privileges
 
       delete:
         spec: http://api.hostbillapp.com/clients/deleteClient/
@@ -74,6 +74,7 @@ resources:
               - Contact.postcode
               - Contact.country
               - Contact.phonenumber
+          - Contact.privileges
 
       verifyLogin:
         display: Verify Login
@@ -109,7 +110,7 @@ resources:
               - Contact.state
               - Contact.postcode
               - Contact.country
-              # ToDo: add priveleges
+          - Contact.privileges
 
       delete:
         spec: http://api.hostbillapp.com/clients/deleteClientContact/
@@ -149,6 +150,7 @@ resources:
               - Contact.postcode
               - Contact.country
               - Contact.phonenumber
+          - Contact.privileges
 
   invoice:
     defaultOperation: getAll
@@ -664,6 +666,54 @@ models:
     - name: country
     - name: phonenumber
       display: Phone Number
+    - name: privileges
+      type: collection
+      options:
+        - display: 'Billing: Receive billing notifications '
+          name: billing_emails
+          type: boolean
+        - display: 'Billing: Allow to view/pay invoices '
+          name: billing_payinvoice
+          type: boolean
+        - display: 'Billing: Place new orders '
+          name: billing_orders
+          type: boolean
+        - display: 'Billing: View current balance '
+          name: billing_balance
+          type: boolean
+        - display: 'Billing: Add funds '
+          name: billing_addfunds
+          type: boolean
+        - display: 'Billing: Creditcard'
+          name: billing_creditcard
+          type: boolean
+        - display: 'Support: Open new tickets '
+          name: support_newticket
+          type: boolean
+        - display: 'Support: View current tickets '
+          name: support_tickets
+          type: boolean
+        - display: 'Support: Close tickets '
+          name: support_closeticket
+          type: boolean
+        - display: 'Support: Receive email notifications '
+          name: support_emails
+          type: boolean
+        - display: 'Misc: Modify main profile details '
+          name: misc_editmain
+          type: boolean
+        - display: 'Misc: View emails history '
+          name: misc_emails
+          type: boolean
+        - display: 'Misc: Edit security settings '
+          name: misc_editipaccess
+          type: boolean
+        - display: 'Misc: Add / Edit contacts '
+          name: misc_manageprofiles
+          type: boolean
+        - display: 'Misc: Access affiliates section'
+          name: misc_affiliates
+          type: boolean
 
   Invoice:
     - name: id
