@@ -1,3 +1,5 @@
+// This code was generated. Therefore do not edit it directly.
+
 import { INodeProperties } from 'n8n-workflow';
 
 export const clientFields: INodeProperties[] = [
@@ -281,7 +283,7 @@ export const clientFields: INodeProperties[] = [
 		'type': 'number',
 		'description': 'Which page to return',
 		'required': true,
-		'default': 0,
+		'default': 1,
 		'displayOptions': {
 			'show': {
 				'resource': [
@@ -316,7 +318,7 @@ export const clientFields: INodeProperties[] = [
 		'type': 'number',
 		'description': 'Which page to return',
 		'required': true,
-		'default': 0,
+		'default': 1,
 		'displayOptions': {
 			'show': {
 				'resource': [

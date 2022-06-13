@@ -585,6 +585,7 @@ def:
       name: page
       desc: Which page to return
       type: number
+      default: 1
     cycle:
       name: cycle
       display: Billing cycle
@@ -638,7 +639,7 @@ models:
 
   Contact:
     - name: id
-      display: Client ID
+      display: Contact ID
       type: number
     - name: firstname
       display: First name

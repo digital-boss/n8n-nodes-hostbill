@@ -1,3 +1,5 @@
+// This code was generated. Therefore do not edit it directly.
+
 import { INode } from '../../../generator/compactTypes';
 
 export const nodeDescr: INode = {
@@ -200,8 +202,8 @@ export const nodeDescr: INode = {
 							'name': 'page',
 							'desc': 'Which page to return',
 							'type': 'number',
+							'default': 1,
 							'required': true,
-							'default': 0,
 							'display': 'Page',
 						},
 					],
@@ -225,8 +227,8 @@ export const nodeDescr: INode = {
 							'name': 'page',
 							'desc': 'Which page to return',
 							'type': 'number',
+							'default': 1,
 							'required': true,
-							'default': 0,
 							'display': 'Page',
 						},
 					],
@@ -522,8 +524,8 @@ export const nodeDescr: INode = {
 							'name': 'page',
 							'desc': 'Which page to return',
 							'type': 'number',
+							'default': 1,
 							'required': true,
-							'default': 0,
 							'display': 'Page',
 						},
 					],
@@ -539,7 +541,7 @@ export const nodeDescr: INode = {
 					'params': [
 						{
 							'name': 'id',
-							'display': 'Client ID',
+							'display': 'Contact ID',
 							'type': 'number',
 							'required': true,
 							'default': 0,
@@ -869,8 +871,8 @@ export const nodeDescr: INode = {
 							'name': 'page',
 							'desc': 'Which page to return',
 							'type': 'number',
+							'default': 1,
 							'required': true,
-							'default': 0,
 							'display': 'Page',
 						},
 						{
@@ -1186,8 +1188,8 @@ export const nodeDescr: INode = {
 							'name': 'page',
 							'desc': 'Which page to return',
 							'type': 'number',
+							'default': 1,
 							'required': true,
-							'default': 0,
 							'display': 'Page',
 						},
 						{
@@ -1358,8 +1360,8 @@ export const nodeDescr: INode = {
 							'name': 'page',
 							'desc': 'Which page to return',
 							'type': 'number',
+							'default': 1,
 							'required': true,
-							'default': 0,
 							'display': 'Page',
 						},
 						{
@@ -1822,8 +1824,8 @@ export const nodeDescr: INode = {
 							'name': 'page',
 							'desc': 'Which page to return',
 							'type': 'number',
+							'default': 1,
 							'required': true,
-							'default': 0,
 							'display': 'Page',
 						},
 						{
@@ -1874,8 +1876,8 @@ export const nodeDescr: INode = {
 				'name': 'page',
 				'desc': 'Which page to return',
 				'type': 'number',
+				'default': 1,
 				'required': true,
-				'default': 0,
 				'display': 'Page',
 			},
 			'cycle': {
@@ -1969,7 +1971,7 @@ export const nodeDescr: INode = {
 		'Contact': [
 			{
 				'name': 'id',
-				'display': 'Client ID',
+				'display': 'Contact ID',
 				'type': 'number',
 				'required': true,
 				'default': 0,

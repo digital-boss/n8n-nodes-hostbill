@@ -1,3 +1,5 @@
+// This code was generated. Therefore do not edit it directly.
+
 import { INodeProperties } from 'n8n-workflow';
 
 export const serviceFields: INodeProperties[] = [
