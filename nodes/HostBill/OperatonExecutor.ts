@@ -11,7 +11,7 @@ import {
 } from 'n8n-core';
 import { IDataObject, NodeApiError, NodeOperationError } from 'n8n-workflow';
 
-import { HostBillApiCredentials } from '../../credentials/HostBillApi.credentials';
+import { IHostBillApiCredentials } from '../../credentials/HostBillApi.credentials';
 import { INode, IOperation, IParam } from '../../generator/compactTypes';
 
 // tslint:disable-next-line: no-any
@@ -19,7 +19,7 @@ export type Mappers = {[mapper: string]: (value: any) => string | undefined};
 
 type Dict<T> = {[key: string]: T};
 
-const normalizeHost = (hostName: string) => hostName.replace(/\/$/, '');
+export const normalizeHost = (hostName: string) => hostName.replace(/\/$/, '');
 
 // tslint:disable-next-line: no-any
 const pick = (obj: any, props: string[]) => props.reduce((acc, i) => {
@@ -31,7 +31,7 @@ const pick = (obj: any, props: string[]) => props.reduce((acc, i) => {
 export class OperationExecutor {
 	private indexItem = 0;
 	private execFns: IExecuteFunctions;
-	private credentials: HostBillApiCredentials;
+	private credentials: IHostBillApiCredentials;
 
 	private reqMappers: Mappers;
 	private nodeDescr: INode;
@@ -46,7 +46,7 @@ export class OperationExecutor {
 		resourceName: string,
 		opearationName: string,
 		execFns: IExecuteFunctions,
-		creds: HostBillApiCredentials,
+		creds: IHostBillApiCredentials,
 	) {
 		this.nodeDescr = nodeDescr;
 		this.reqMappers = reqMappers;
