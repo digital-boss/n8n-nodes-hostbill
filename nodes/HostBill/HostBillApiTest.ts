@@ -16,6 +16,9 @@ export async function hostBillApiTest(this: ICredentialTestFunctions, credential
 	const creds = credentials.data as unknown as IHostBillApiCredentials;
 
 	const options: OptionsWithUri = {
+		headers: {
+			'Content-Type': 'application/json',
+		},
 		method: 'GET',
 		uri: normalizeHost(creds.server) + '/admin/api.php',
 		json: true,

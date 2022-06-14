@@ -140,6 +140,9 @@ export class OperationExecutor {
 			'call': call,
 		};
 		return {
+			headers: {
+				'Content-Type': 'application/json',
+			},
 			method: 'GET',
 			uri: normalizeHost(this.credentials.server) + '/admin/api.php',
 			json: true,
