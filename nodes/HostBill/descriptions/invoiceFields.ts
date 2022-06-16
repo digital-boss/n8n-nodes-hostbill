@@ -239,8 +239,8 @@ export const invoiceFields: INodeProperties[] = [
 		},
 	},
 	{
-		'name': 'Optional Fields',
-		'displayName': 'Optional Fields',
+		'name': 'Additional Fields',
+		'displayName': 'Additional Fields',
 		'type': 'collection',
 		'required': true,
 		'default': [],

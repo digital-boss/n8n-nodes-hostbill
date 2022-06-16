@@ -177,8 +177,8 @@ export const accountFields: INodeProperties[] = [
 		},
 	},
 	{
-		'name': 'optionalFields',
-		'displayName': 'Optional Fields',
+		'name': 'additionalFields',
+		'displayName': 'Additional Fields',
 		'type': 'collection',
 		'required': true,
 		'default': [],
@@ -347,8 +347,8 @@ export const accountFields: INodeProperties[] = [
 		},
 	},
 	{
-		'name': 'optionalFields',
-		'displayName': 'Optional Fields',
+		'name': 'additionalFields',
+		'displayName': 'Additional Fields',
 		'type': 'collection',
 		'required': true,
 		'default': [],

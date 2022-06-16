@@ -139,8 +139,8 @@ export const clientContactFields: INodeProperties[] = [
 		},
 	},
 	{
-		'name': 'Optional Fields',
-		'displayName': 'Optional Fields',
+		'name': 'Additional Fields',
+		'displayName': 'Additional Fields',
 		'type': 'collection',
 		'required': true,
 		'default': [],
@@ -418,8 +418,8 @@ export const clientContactFields: INodeProperties[] = [
 		},
 	},
 	{
-		'name': 'Optional Fields',
-		'displayName': 'Optional Fields',
+		'name': 'Additional Fields',
+		'displayName': 'Additional Fields',
 		'type': 'collection',
 		'required': true,
 		'default': [],

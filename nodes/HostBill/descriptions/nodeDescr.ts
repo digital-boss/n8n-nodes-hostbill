@@ -51,8 +51,8 @@ export const nodeDescr: INode = {
 							'default': '',
 						},
 						{
-							'name': 'optionalFields',
-							'display': 'Optional Fields',
+							'name': 'additionalFields',
+							'display': 'Additional Fields',
 							'type': 'collection',
 							'options': [
 								{
@@ -364,7 +364,8 @@ export const nodeDescr: INode = {
 							'default': 0,
 						},
 						{
-							'name': 'optionalFields',
+							'name': 'additionalFields',
+							'display': 'Additional Fields',
 							'type': 'collection',
 							'options': [
 								{
@@ -441,7 +442,6 @@ export const nodeDescr: INode = {
 							],
 							'required': true,
 							'default': [],
-							'display': 'OptionalFields',
 						},
 						{
 							'name': 'privileges',
@@ -646,7 +646,7 @@ export const nodeDescr: INode = {
 							'default': '',
 						},
 						{
-							'name': 'Optional Fields',
+							'name': 'Additional Fields',
 							'type': 'collection',
 							'options': [
 								{
@@ -701,7 +701,7 @@ export const nodeDescr: INode = {
 							],
 							'required': true,
 							'default': [],
-							'display': 'Optional Fields',
+							'display': 'Additional Fields',
 						},
 						{
 							'name': 'privileges',
@@ -889,7 +889,7 @@ export const nodeDescr: INode = {
 							'default': 0,
 						},
 						{
-							'name': 'Optional Fields',
+							'name': 'Additional Fields',
 							'type': 'collection',
 							'options': [
 								{
@@ -966,7 +966,7 @@ export const nodeDescr: INode = {
 							],
 							'required': true,
 							'default': [],
-							'display': 'Optional Fields',
+							'display': 'Additional Fields',
 						},
 						{
 							'name': 'privileges',
@@ -1205,7 +1205,7 @@ export const nodeDescr: INode = {
 							'default': '',
 						},
 						{
-							'name': 'Optional Fields',
+							'name': 'Additional Fields',
 							'type': 'collection',
 							'options': [
 								{
@@ -1232,7 +1232,7 @@ export const nodeDescr: INode = {
 							],
 							'required': true,
 							'default': [],
-							'display': 'Optional Fields',
+							'display': 'Additional Fields',
 						},
 					],
 					'name': 'addPayment',
@@ -1876,8 +1876,8 @@ export const nodeDescr: INode = {
 							'default': 0,
 						},
 						{
-							'name': 'optionalFields',
-							'display': 'Optional Fields',
+							'name': 'additionalFields',
+							'display': 'Additional Fields',
 							'type': 'collection',
 							'options': [
 								{
@@ -2030,8 +2030,8 @@ export const nodeDescr: INode = {
 							'default': 0,
 						},
 						{
-							'name': 'optionalFields',
-							'display': 'Optional Fields',
+							'name': 'additionalFields',
+							'display': 'Additional Fields',
 							'type': 'collection',
 							'options': [
 								{

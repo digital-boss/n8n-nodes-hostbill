@@ -14,8 +14,8 @@ resources:
           - Contact.password
           - Contact.password2
 
-          - name: optionalFields
-            display: Optional Fields
+          - name: additionalFields
+            display: Additional Fields
             type: collection
             options:
               - Client.notifyclient
@@ -61,7 +61,8 @@ resources:
           - info
         params:
           - Client.id
-          - name: optionalFields
+          - name: additionalFields
+            display: Additional Fields
             type: collection
             options:
               - Contact.firstname
@@ -100,7 +101,7 @@ resources:
           - Contact.email
           - Contact.password
           - Contact.password2
-          - name: Optional Fields
+          - name: Additional Fields
             type: collection
             options:
               - Contact.phonenumber
@@ -137,7 +138,7 @@ resources:
           - info
         params:
           - Contact.id
-          - name: Optional Fields
+          - name: Additional Fields
             type: collection
             options:
               - Contact.firstname
@@ -206,7 +207,7 @@ resources:
           - name: date
             display: Transaction Date
             type: dateTime
-          - name: Optional Fields
+          - name: Additional Fields
             type: collection
             options:
               - name: transnumber
@@ -454,8 +455,8 @@ resources:
           - info
         params:
           - Account.id
-          - name: optionalFields
-            display: Optional Fields
+          - name: additionalFields
+            display: Additional Fields
             type: collection
             options:
               - Account.product_id
@@ -486,8 +487,8 @@ resources:
             display: Addon ID
             type: number
             desc: ID of addon from hb_addons table to add
-          - name: optionalFields
-            display: Optional Fields
+          - name: additionalFields
+            display: Additional Fields
             type: collection
             options:
               - name: invoice
