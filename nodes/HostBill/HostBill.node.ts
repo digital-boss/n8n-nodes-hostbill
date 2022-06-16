@@ -16,7 +16,7 @@ import {
 } from './OperatonExecutor';
 
 import { version } from '../version';
-import { HostBillApiCredentials } from '../../credentials/HostBillApi.credentials';
+import { IHostBillApiCredentials } from '../../credentials/HostBillApi.credentials';
 import { hostBillApiTest } from './HostBillApiTest';
 import { accountFields, clientContactFields, clientFields, domainFields, invoiceFields, orderFields, resources, serviceFields } from './descriptions';
 
@@ -64,7 +64,7 @@ export class HostBill implements INodeType {
 	};
 
 	async execute(this: IExecuteFunctions): Promise<INodeExecutionData[][]> {
-		const credentials = await this.getCredentials('hostBillApi') as unknown as HostBillApiCredentials;
+		const credentials = await this.getCredentials('hostBillApi') as unknown as IHostBillApiCredentials;
 		const items = this.getInputData();
 		const length = items.length;
 		const returnData: IDataObject[] = [];

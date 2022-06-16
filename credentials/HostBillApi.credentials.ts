@@ -4,7 +4,7 @@ import {
 } from 'n8n-workflow';
 
 
-export interface HostBillApiCredentials {
+export interface IHostBillApiCredentials {
 	server: string;
 	apiId: string;
 	apiKey: string;

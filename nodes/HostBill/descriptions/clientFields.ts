@@ -1,3 +1,5 @@
+// This code was generated. Therefore do not edit it directly.
+
 import { INodeProperties } from 'n8n-workflow';
 
 export const clientFields: INodeProperties[] = [
@@ -132,11 +134,12 @@ export const clientFields: INodeProperties[] = [
 		},
 	},
 	{
-		'name': 'optionalFields',
-		'displayName': 'Optional Fields',
+		'name': 'additionalFields',
+		'displayName': 'Additional Fields',
 		'type': 'collection',
 		'required': true,
 		'default': [],
+		'placeholder': 'Add Field',
 		'displayOptions': {
 			'show': {
 				'resource': [
@@ -242,6 +245,130 @@ export const clientFields: INodeProperties[] = [
 		],
 	},
 	{
+		'name': 'privileges',
+		'displayName': 'Privileges',
+		'type': 'collection',
+		'required': true,
+		'default': [],
+		'displayOptions': {
+			'show': {
+				'resource': [
+					'client',
+				],
+				'operation': [
+					'create',
+				],
+			},
+		},
+		'options': [
+			{
+				'name': 'billing_emails',
+				'displayName': 'Billing: Receive billing notifications ',
+				'type': 'boolean',
+				'required': false,
+				'default': false,
+			},
+			{
+				'name': 'billing_payinvoice',
+				'displayName': 'Billing: Allow to view/pay invoices ',
+				'type': 'boolean',
+				'required': false,
+				'default': false,
+			},
+			{
+				'name': 'billing_orders',
+				'displayName': 'Billing: Place new orders ',
+				'type': 'boolean',
+				'required': false,
+				'default': false,
+			},
+			{
+				'name': 'billing_balance',
+				'displayName': 'Billing: View current balance ',
+				'type': 'boolean',
+				'required': false,
+				'default': false,
+			},
+			{
+				'name': 'billing_addfunds',
+				'displayName': 'Billing: Add funds ',
+				'type': 'boolean',
+				'required': false,
+				'default': false,
+			},
+			{
+				'name': 'billing_creditcard',
+				'displayName': 'Billing: Creditcard',
+				'type': 'boolean',
+				'required': false,
+				'default': false,
+			},
+			{
+				'name': 'support_newticket',
+				'displayName': 'Support: Open new tickets ',
+				'type': 'boolean',
+				'required': false,
+				'default': false,
+			},
+			{
+				'name': 'support_tickets',
+				'displayName': 'Support: View current tickets ',
+				'type': 'boolean',
+				'required': false,
+				'default': false,
+			},
+			{
+				'name': 'support_closeticket',
+				'displayName': 'Support: Close tickets ',
+				'type': 'boolean',
+				'required': false,
+				'default': false,
+			},
+			{
+				'name': 'support_emails',
+				'displayName': 'Support: Receive email notifications ',
+				'type': 'boolean',
+				'required': false,
+				'default': false,
+			},
+			{
+				'name': 'misc_editmain',
+				'displayName': 'Misc: Modify main profile details ',
+				'type': 'boolean',
+				'required': false,
+				'default': false,
+			},
+			{
+				'name': 'misc_emails',
+				'displayName': 'Misc: View emails history ',
+				'type': 'boolean',
+				'required': false,
+				'default': false,
+			},
+			{
+				'name': 'misc_editipaccess',
+				'displayName': 'Misc: Edit security settings ',
+				'type': 'boolean',
+				'required': false,
+				'default': false,
+			},
+			{
+				'name': 'misc_manageprofiles',
+				'displayName': 'Misc: Add / Edit contacts ',
+				'type': 'boolean',
+				'required': false,
+				'default': false,
+			},
+			{
+				'name': 'misc_affiliates',
+				'displayName': 'Misc: Access affiliates section',
+				'type': 'boolean',
+				'required': false,
+				'default': false,
+			},
+		],
+	},
+	{
 		'name': 'id',
 		'displayName': 'Client ID',
 		'type': 'number',
@@ -276,12 +403,12 @@ export const clientFields: INodeProperties[] = [
 		},
 	},
 	{
-		'name': 'page',
-		'displayName': 'Page',
-		'type': 'number',
-		'description': 'Which page to return',
+		'name': 'additionalFields',
+		'displayName': 'Additional Fields',
+		'type': 'collection',
 		'required': true,
-		'default': 0,
+		'default': [],
+		'placeholder': 'Add Field',
 		'displayOptions': {
 			'show': {
 				'resource': [
@@ -292,6 +419,16 @@ export const clientFields: INodeProperties[] = [
 				],
 			},
 		},
+		'options': [
+			{
+				'name': 'page',
+				'displayName': 'Page',
+				'type': 'number',
+				'description': 'Which page to return',
+				'required': false,
+				'default': 1,
+			},
+		],
 	},
 	{
 		'name': 'id',
@@ -311,12 +448,12 @@ export const clientFields: INodeProperties[] = [
 		},
 	},
 	{
-		'name': 'page',
-		'displayName': 'Page',
-		'type': 'number',
-		'description': 'Which page to return',
+		'name': 'additionalFields',
+		'displayName': 'Additional Fields',
+		'type': 'collection',
 		'required': true,
-		'default': 0,
+		'default': [],
+		'placeholder': 'Add Field',
 		'displayOptions': {
 			'show': {
 				'resource': [
@@ -327,6 +464,16 @@ export const clientFields: INodeProperties[] = [
 				],
 			},
 		},
+		'options': [
+			{
+				'name': 'page',
+				'displayName': 'Page',
+				'type': 'number',
+				'description': 'Which page to return',
+				'required': false,
+				'default': 1,
+			},
+		],
 	},
 	{
 		'name': 'id',
@@ -346,11 +493,12 @@ export const clientFields: INodeProperties[] = [
 		},
 	},
 	{
-		'name': 'optionalFields',
-		'displayName': 'OptionalFields',
+		'name': 'additionalFields',
+		'displayName': 'Additional Fields',
 		'type': 'collection',
 		'required': true,
 		'default': [],
+		'placeholder': 'Add Field',
 		'displayOptions': {
 			'show': {
 				'resource': [
@@ -432,6 +580,130 @@ export const clientFields: INodeProperties[] = [
 				'type': 'string',
 				'required': false,
 				'default': '',
+			},
+		],
+	},
+	{
+		'name': 'privileges',
+		'displayName': 'Privileges',
+		'type': 'collection',
+		'required': true,
+		'default': [],
+		'displayOptions': {
+			'show': {
+				'resource': [
+					'client',
+				],
+				'operation': [
+					'update',
+				],
+			},
+		},
+		'options': [
+			{
+				'name': 'billing_emails',
+				'displayName': 'Billing: Receive billing notifications ',
+				'type': 'boolean',
+				'required': false,
+				'default': false,
+			},
+			{
+				'name': 'billing_payinvoice',
+				'displayName': 'Billing: Allow to view/pay invoices ',
+				'type': 'boolean',
+				'required': false,
+				'default': false,
+			},
+			{
+				'name': 'billing_orders',
+				'displayName': 'Billing: Place new orders ',
+				'type': 'boolean',
+				'required': false,
+				'default': false,
+			},
+			{
+				'name': 'billing_balance',
+				'displayName': 'Billing: View current balance ',
+				'type': 'boolean',
+				'required': false,
+				'default': false,
+			},
+			{
+				'name': 'billing_addfunds',
+				'displayName': 'Billing: Add funds ',
+				'type': 'boolean',
+				'required': false,
+				'default': false,
+			},
+			{
+				'name': 'billing_creditcard',
+				'displayName': 'Billing: Creditcard',
+				'type': 'boolean',
+				'required': false,
+				'default': false,
+			},
+			{
+				'name': 'support_newticket',
+				'displayName': 'Support: Open new tickets ',
+				'type': 'boolean',
+				'required': false,
+				'default': false,
+			},
+			{
+				'name': 'support_tickets',
+				'displayName': 'Support: View current tickets ',
+				'type': 'boolean',
+				'required': false,
+				'default': false,
+			},
+			{
+				'name': 'support_closeticket',
+				'displayName': 'Support: Close tickets ',
+				'type': 'boolean',
+				'required': false,
+				'default': false,
+			},
+			{
+				'name': 'support_emails',
+				'displayName': 'Support: Receive email notifications ',
+				'type': 'boolean',
+				'required': false,
+				'default': false,
+			},
+			{
+				'name': 'misc_editmain',
+				'displayName': 'Misc: Modify main profile details ',
+				'type': 'boolean',
+				'required': false,
+				'default': false,
+			},
+			{
+				'name': 'misc_emails',
+				'displayName': 'Misc: View emails history ',
+				'type': 'boolean',
+				'required': false,
+				'default': false,
+			},
+			{
+				'name': 'misc_editipaccess',
+				'displayName': 'Misc: Edit security settings ',
+				'type': 'boolean',
+				'required': false,
+				'default': false,
+			},
+			{
+				'name': 'misc_manageprofiles',
+				'displayName': 'Misc: Add / Edit contacts ',
+				'type': 'boolean',
+				'required': false,
+				'default': false,
+			},
+			{
+				'name': 'misc_affiliates',
+				'displayName': 'Misc: Access affiliates section',
+				'type': 'boolean',
+				'required': false,
+				'default': false,
 			},
 		],
 	},

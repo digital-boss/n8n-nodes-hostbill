@@ -61,7 +61,7 @@ const getDefaultForType = (type?: NodePropertyTypes): any => {
 		case 'dateTime':
 			return '';
 		case 'fixedCollection':
-			return [];
+			return {};
 		case 'number':
 			return 0;
 		case 'string':
@@ -159,6 +159,15 @@ const paramAddDisplay = (param: Param, node: INode): Param => {
 	}
 	return param;
 };
+
+const paramAddPlaceholder = (param: Param, node: INode): Param => {
+	if (typeof param === 'object' && param.placeholder === undefined) {
+		if (param.name === 'additionalFields') {
+			param.placeholder = 'Add Field';
+		}
+	}
+	return param;
+}
 //#endregion Param mappers
 
 const mapParam = (param: Param, node: INode): Param => {
@@ -168,6 +177,7 @@ const mapParam = (param: Param, node: INode): Param => {
 		paramAddType,
 		paramAddDefault,
 		paramAddDisplay,
+		paramAddPlaceholder,
 	].forEach(m => param = m(param, node));
 	return param;
 };

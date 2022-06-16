@@ -1,3 +1,5 @@
+// This code was generated. Therefore do not edit it directly.
+
 import { INodeProperties } from 'n8n-workflow';
 
 export const accountFields: INodeProperties[] = [
@@ -93,29 +95,12 @@ export const accountFields: INodeProperties[] = [
 		},
 	},
 	{
-		'name': 'page',
-		'displayName': 'Page',
-		'type': 'number',
-		'description': 'Which page to return',
+		'name': 'additionalFields',
+		'displayName': 'Additional Fields',
+		'type': 'collection',
 		'required': true,
-		'default': 0,
-		'displayOptions': {
-			'show': {
-				'resource': [
-					'account',
-				],
-				'operation': [
-					'getAll',
-				],
-			},
-		},
-	},
-	{
-		'name': 'list',
-		'displayName': 'Status to List',
-		'type': 'options',
-		'required': true,
-		'default': '',
+		'default': [],
+		'placeholder': 'Add Field',
 		'displayOptions': {
 			'show': {
 				'resource': [
@@ -128,32 +113,49 @@ export const accountFields: INodeProperties[] = [
 		},
 		'options': [
 			{
-				'name': 'All',
-				'value': 'all',
+				'name': 'page',
+				'displayName': 'Page',
+				'type': 'number',
+				'description': 'Which page to return',
+				'required': false,
+				'default': 1,
 			},
 			{
-				'name': 'Active',
-				'value': 'all_active',
-			},
-			{
-				'name': 'Pending',
-				'value': 'all_pending',
-			},
-			{
-				'name': 'Suspended',
-				'value': 'all_suspended',
-			},
-			{
-				'name': 'Terminated',
-				'value': 'all_terminated',
-			},
-			{
-				'name': 'Fraud',
-				'value': 'all_fraud',
-			},
-			{
-				'name': 'Cancelled',
-				'value': 'all_cancelled',
+				'name': 'list',
+				'displayName': 'Status to List',
+				'type': 'options',
+				'required': false,
+				'default': '',
+				'options': [
+					{
+						'name': 'All',
+						'value': 'all',
+					},
+					{
+						'name': 'Active',
+						'value': 'all_active',
+					},
+					{
+						'name': 'Pending',
+						'value': 'all_pending',
+					},
+					{
+						'name': 'Suspended',
+						'value': 'all_suspended',
+					},
+					{
+						'name': 'Terminated',
+						'value': 'all_terminated',
+					},
+					{
+						'name': 'Fraud',
+						'value': 'all_fraud',
+					},
+					{
+						'name': 'Cancelled',
+						'value': 'all_cancelled',
+					},
+				],
 			},
 		],
 	},
@@ -175,11 +177,12 @@ export const accountFields: INodeProperties[] = [
 		},
 	},
 	{
-		'name': 'optionalFields',
-		'displayName': 'Optional Fields',
+		'name': 'additionalFields',
+		'displayName': 'Additional Fields',
 		'type': 'collection',
 		'required': true,
 		'default': [],
+		'placeholder': 'Add Field',
 		'displayOptions': {
 			'show': {
 				'resource': [
@@ -345,11 +348,12 @@ export const accountFields: INodeProperties[] = [
 		},
 	},
 	{
-		'name': 'optionalFields',
-		'displayName': 'Optional Fields',
+		'name': 'additionalFields',
+		'displayName': 'Additional Fields',
 		'type': 'collection',
 		'required': true,
 		'default': [],
+		'placeholder': 'Add Field',
 		'displayOptions': {
 			'show': {
 				'resource': [

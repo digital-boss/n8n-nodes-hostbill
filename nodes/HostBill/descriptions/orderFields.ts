@@ -1,3 +1,5 @@
+// This code was generated. Therefore do not edit it directly.
+
 import { INodeProperties } from 'n8n-workflow';
 
 export const orderFields: INodeProperties[] = [
@@ -359,29 +361,12 @@ export const orderFields: INodeProperties[] = [
 		},
 	},
 	{
-		'name': 'page',
-		'displayName': 'Page',
-		'type': 'number',
-		'description': 'Which page to return',
+		'name': 'additionalFields',
+		'displayName': 'Additional Fields',
+		'type': 'collection',
 		'required': true,
-		'default': 0,
-		'displayOptions': {
-			'show': {
-				'resource': [
-					'order',
-				],
-				'operation': [
-					'getAll',
-				],
-			},
-		},
-	},
-	{
-		'name': 'list',
-		'displayName': 'Status or Orders to List',
-		'type': 'options',
-		'required': true,
-		'default': '',
+		'default': [],
+		'placeholder': 'Add Field',
 		'displayOptions': {
 			'show': {
 				'resource': [
@@ -394,24 +379,41 @@ export const orderFields: INodeProperties[] = [
 		},
 		'options': [
 			{
-				'name': 'All',
-				'value': 'all',
+				'name': 'page',
+				'displayName': 'Page',
+				'type': 'number',
+				'description': 'Which page to return',
+				'required': false,
+				'default': 1,
 			},
 			{
-				'name': 'Active',
-				'value': 'active',
-			},
-			{
-				'name': 'Pending',
-				'value': 'pending',
-			},
-			{
-				'name': 'Fraud',
-				'value': 'fraud',
-			},
-			{
-				'name': 'Cancelled',
-				'value': 'cancelled',
+				'name': 'list',
+				'displayName': 'Status or Orders to List',
+				'type': 'options',
+				'required': false,
+				'default': '',
+				'options': [
+					{
+						'name': 'All',
+						'value': 'all',
+					},
+					{
+						'name': 'Active',
+						'value': 'active',
+					},
+					{
+						'name': 'Pending',
+						'value': 'pending',
+					},
+					{
+						'name': 'Fraud',
+						'value': 'fraud',
+					},
+					{
+						'name': 'Cancelled',
+						'value': 'cancelled',
+					},
+				],
 			},
 		],
 	},

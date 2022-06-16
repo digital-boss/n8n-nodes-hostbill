@@ -14,8 +14,8 @@ resources:
           - Contact.password
           - Contact.password2
 
-          - name: optionalFields
-            display: Optional Fields
+          - name: additionalFields
+            display: Additional Fields
             type: collection
             options:
               - Client.notifyclient
@@ -29,7 +29,7 @@ resources:
               - Contact.state
               - Contact.postcode
               - Contact.country
-              # ToDo: add priveleges
+          - Contact.privileges
 
       delete:
         spec: http://api.hostbillapp.com/clients/deleteClient/
@@ -47,21 +47,22 @@ resources:
         spec: http://api.hostbillapp.com/clients/getClients/
         responseMap: clients
         params:
-          - $ref: "#/def/fields/page"
+          - $ref: "#/def/fields/optPage"
       getDomains:
         display: Get Domains
         spec: https://api.hostbillapp.com/clients/getClientDomains/
         responseMap: domains
         params:
           - Client.id
-          - $ref: "#/def/fields/page"
+          - $ref: "#/def/fields/optPage"
       update:
         spec: http://api.hostbillapp.com/clients/setClientDetails/
         responseMap:
           - info
         params:
           - Client.id
-          - name: optionalFields
+          - name: additionalFields
+            display: Additional Fields
             type: collection
             options:
               - Contact.firstname
@@ -74,6 +75,7 @@ resources:
               - Contact.postcode
               - Contact.country
               - Contact.phonenumber
+          - Contact.privileges
 
       verifyLogin:
         display: Verify Login
@@ -99,7 +101,7 @@ resources:
           - Contact.email
           - Contact.password
           - Contact.password2
-          - name: Optional Fields
+          - name: Additional Fields
             type: collection
             options:
               - Contact.phonenumber
@@ -109,7 +111,7 @@ resources:
               - Contact.state
               - Contact.postcode
               - Contact.country
-              # ToDo: add priveleges
+          - Contact.privileges
 
       delete:
         spec: http://api.hostbillapp.com/clients/deleteClientContact/
@@ -128,7 +130,7 @@ resources:
         responseMap: contacts
         params:
           - Client.id
-          - $ref: "#/def/fields/page"
+          - $ref: "#/def/fields/optPage"
 
       update:
         spec: http://api.hostbillapp.com/clients/setContactDetails/
@@ -136,7 +138,7 @@ resources:
           - info
         params:
           - Contact.id
-          - name: Optional Fields
+          - name: Additional Fields
             type: collection
             options:
               - Contact.firstname
@@ -149,6 +151,7 @@ resources:
               - Contact.postcode
               - Contact.country
               - Contact.phonenumber
+          - Contact.privileges
 
   invoice:
     defaultOperation: getAll
@@ -204,7 +207,7 @@ resources:
           - name: date
             display: Transaction Date
             type: dateTime
-          - name: Optional Fields
+          - name: Additional Fields
             type: collection
             options:
               - name: transnumber
@@ -251,16 +254,20 @@ resources:
         spec: https://api.hostbillapp.com/invoices/getInvoices/
         responseMap: invoices
         params:
-          - $ref: "#/def/fields/page"
-          - name: list
-            display: Status of invoices to list
-            type: options
+          - name: additionalFields
+            display: Additional Fields
+            type: collection
             options:
-              - all
-              - paid
-              - unpaid
-              - cancelled
-            default: all
+              - $ref: "#/def/fields/page"
+              - name: list
+                display: Status of invoices to list
+                type: options
+                options:
+                  - all
+                  - paid
+                  - unpaid
+                  - cancelled
+                default: all
 
   order:
     defaultOperation: getAll
@@ -369,16 +376,20 @@ resources:
         spec: http://api.hostbillapp.com/orders/getOrders/
         responseMap: orders
         params:
-          - $ref: "#/def/fields/page"
-          - name: list
-            display: Status or Orders to List
-            type: options
+          - name: additionalFields
+            display: Additional Fields
+            type: collection
             options:
-              - all
-              - active
-              - pending
-              - fraud
-              - cancelled
+              - $ref: "#/def/fields/page"
+              - name: list
+                display: Status or Orders to List
+                type: options
+                options:
+                  - all
+                  - active
+                  - pending
+                  - fraud
+                  - cancelled
 
       setStatus:
         display: Set Status
@@ -426,25 +437,29 @@ resources:
         spec: http://api.hostbillapp.com/accounts/getAccounts/
         responseMap: accounts
         params:
-          - $ref: "#/def/fields/page"
-          - name: list
-            display: Status to List
-            type: options
+          - name: additionalFields
+            display: Additional Fields
+            type: collection
             options:
-              - name: All
-                value: all
-              - name: Active
-                value: all_active
-              - name: Pending
-                value: all_pending
-              - name: Suspended
-                value: all_suspended
-              - name: Terminated
-                value: all_terminated
-              - name: Fraud
-                value: all_fraud
-              - name: Cancelled
-                value: all_cancelled
+              - $ref: "#/def/fields/page"
+              - name: list
+                display: Status to List
+                type: options
+                options:
+                  - name: All
+                    value: all
+                  - name: Active
+                    value: all_active
+                  - name: Pending
+                    value: all_pending
+                  - name: Suspended
+                    value: all_suspended
+                  - name: Terminated
+                    value: all_terminated
+                  - name: Fraud
+                    value: all_fraud
+                  - name: Cancelled
+                    value: all_cancelled
 
       update:
         spec: http://api.hostbillapp.com/accounts/editAccountDetails/
@@ -452,8 +467,8 @@ resources:
           - info
         params:
           - Account.id
-          - name: optionalFields
-            display: Optional Fields
+          - name: additionalFields
+            display: Additional Fields
             type: collection
             options:
               - Account.product_id
@@ -484,8 +499,8 @@ resources:
             display: Addon ID
             type: number
             desc: ID of addon from hb_addons table to add
-          - name: optionalFields
-            display: Optional Fields
+          - name: additionalFields
+            display: Additional Fields
             type: collection
             options:
               - name: invoice
@@ -563,19 +578,23 @@ resources:
         spec: http://api.hostbillapp.com/domains/getDomains/
         responseMap: domains
         params:
-          - $ref: "#/def/fields/page"
-          - name: list
-            display: Status to List
-            type: options
+          - name: additionalFields
+            display: Additional Fields
+            type: collection
             options:
-              - all
-              - active
-              - expired
-              - pending
-              - name: Pending Transfer
-                value: pending_transfer
-              - name: Pending Registration
-                value: pending_registration
+              - $ref: "#/def/fields/page"
+              - name: list
+                display: Status to List
+                type: options
+                options:
+                  - all
+                  - active
+                  - expired
+                  - pending
+                  - name: Pending Transfer
+                    value: pending_transfer
+                  - name: Pending Registration
+                    value: pending_registration
 
 
 # Definitions.
@@ -585,6 +604,13 @@ def:
       name: page
       desc: Which page to return
       type: number
+      default: 1
+    optPage:
+      name: additionalFields
+      display: Additional Fields
+      type: collection
+      options:
+        - $ref: "#/def/fields/page"
     cycle:
       name: cycle
       display: Billing cycle
@@ -638,7 +664,7 @@ models:
 
   Contact:
     - name: id
-      display: Client ID
+      display: Contact ID
       type: number
     - name: firstname
       display: First name
@@ -663,6 +689,54 @@ models:
     - name: country
     - name: phonenumber
       display: Phone Number
+    - name: privileges
+      type: collection
+      options:
+        - display: 'Billing: Receive billing notifications '
+          name: billing_emails
+          type: boolean
+        - display: 'Billing: Allow to view/pay invoices '
+          name: billing_payinvoice
+          type: boolean
+        - display: 'Billing: Place new orders '
+          name: billing_orders
+          type: boolean
+        - display: 'Billing: View current balance '
+          name: billing_balance
+          type: boolean
+        - display: 'Billing: Add funds '
+          name: billing_addfunds
+          type: boolean
+        - display: 'Billing: Creditcard'
+          name: billing_creditcard
+          type: boolean
+        - display: 'Support: Open new tickets '
+          name: support_newticket
+          type: boolean
+        - display: 'Support: View current tickets '
+          name: support_tickets
+          type: boolean
+        - display: 'Support: Close tickets '
+          name: support_closeticket
+          type: boolean
+        - display: 'Support: Receive email notifications '
+          name: support_emails
+          type: boolean
+        - display: 'Misc: Modify main profile details '
+          name: misc_editmain
+          type: boolean
+        - display: 'Misc: View emails history '
+          name: misc_emails
+          type: boolean
+        - display: 'Misc: Edit security settings '
+          name: misc_editipaccess
+          type: boolean
+        - display: 'Misc: Add / Edit contacts '
+          name: misc_manageprofiles
+          type: boolean
+        - display: 'Misc: Access affiliates section'
+          name: misc_affiliates
+          type: boolean
 
   Invoice:
     - name: id

@@ -62,7 +62,7 @@ const mapParam = (param: IParam, display?: [res: string, op: string]): INodeProp
 		description: param.desc,
 		required: param.required,
 		default: param.default,
-
+		placeholder: param.placeholder,
 	};
 	if (display) {
 		result.displayOptions = {

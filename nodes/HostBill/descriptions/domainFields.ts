@@ -1,3 +1,5 @@
+// This code was generated. Therefore do not edit it directly.
+
 import { INodeProperties } from 'n8n-workflow';
 
 export const domainFields: INodeProperties[] = [
@@ -148,29 +150,12 @@ export const domainFields: INodeProperties[] = [
 		},
 	},
 	{
-		'name': 'page',
-		'displayName': 'Page',
-		'type': 'number',
-		'description': 'Which page to return',
+		'name': 'additionalFields',
+		'displayName': 'Additional Fields',
+		'type': 'collection',
 		'required': true,
-		'default': 0,
-		'displayOptions': {
-			'show': {
-				'resource': [
-					'domain',
-				],
-				'operation': [
-					'getAll',
-				],
-			},
-		},
-	},
-	{
-		'name': 'list',
-		'displayName': 'Status to List',
-		'type': 'options',
-		'required': true,
-		'default': '',
+		'default': [],
+		'placeholder': 'Add Field',
 		'displayOptions': {
 			'show': {
 				'resource': [
@@ -183,28 +168,45 @@ export const domainFields: INodeProperties[] = [
 		},
 		'options': [
 			{
-				'name': 'All',
-				'value': 'all',
+				'name': 'page',
+				'displayName': 'Page',
+				'type': 'number',
+				'description': 'Which page to return',
+				'required': false,
+				'default': 1,
 			},
 			{
-				'name': 'Active',
-				'value': 'active',
-			},
-			{
-				'name': 'Expired',
-				'value': 'expired',
-			},
-			{
-				'name': 'Pending',
-				'value': 'pending',
-			},
-			{
-				'name': 'Pending Transfer',
-				'value': 'pending_transfer',
-			},
-			{
-				'name': 'Pending Registration',
-				'value': 'pending_registration',
+				'name': 'list',
+				'displayName': 'Status to List',
+				'type': 'options',
+				'required': false,
+				'default': '',
+				'options': [
+					{
+						'name': 'All',
+						'value': 'all',
+					},
+					{
+						'name': 'Active',
+						'value': 'active',
+					},
+					{
+						'name': 'Expired',
+						'value': 'expired',
+					},
+					{
+						'name': 'Pending',
+						'value': 'pending',
+					},
+					{
+						'name': 'Pending Transfer',
+						'value': 'pending_transfer',
+					},
+					{
+						'name': 'Pending Registration',
+						'value': 'pending_registration',
+					},
+				],
 			},
 		],
 	},
