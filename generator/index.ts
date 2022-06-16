@@ -61,7 +61,7 @@ const getDefaultForType = (type?: NodePropertyTypes): any => {
 		case 'dateTime':
 			return '';
 		case 'fixedCollection':
-			return [];
+			return {};
 		case 'number':
 			return 0;
 		case 'string':
