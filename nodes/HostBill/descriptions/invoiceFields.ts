@@ -361,29 +361,12 @@ export const invoiceFields: INodeProperties[] = [
 		},
 	},
 	{
-		'name': 'page',
-		'displayName': 'Page',
-		'type': 'number',
-		'description': 'Which page to return',
+		'name': 'additionalFields',
+		'displayName': 'Additional Fields',
+		'type': 'collection',
 		'required': true,
-		'default': 1,
-		'displayOptions': {
-			'show': {
-				'resource': [
-					'invoice',
-				],
-				'operation': [
-					'getAll',
-				],
-			},
-		},
-	},
-	{
-		'name': 'list',
-		'displayName': 'Status of invoices to list',
-		'type': 'options',
-		'required': true,
-		'default': 'all',
+		'default': [],
+		'placeholder': 'Add Field',
 		'displayOptions': {
 			'show': {
 				'resource': [
@@ -396,20 +379,37 @@ export const invoiceFields: INodeProperties[] = [
 		},
 		'options': [
 			{
-				'name': 'All',
-				'value': 'all',
+				'name': 'page',
+				'displayName': 'Page',
+				'type': 'number',
+				'description': 'Which page to return',
+				'required': false,
+				'default': 1,
 			},
 			{
-				'name': 'Paid',
-				'value': 'paid',
-			},
-			{
-				'name': 'Unpaid',
-				'value': 'unpaid',
-			},
-			{
-				'name': 'Cancelled',
-				'value': 'cancelled',
+				'name': 'list',
+				'displayName': 'Status of invoices to list',
+				'type': 'options',
+				'required': false,
+				'default': 'all',
+				'options': [
+					{
+						'name': 'All',
+						'value': 'all',
+					},
+					{
+						'name': 'Paid',
+						'value': 'paid',
+					},
+					{
+						'name': 'Unpaid',
+						'value': 'unpaid',
+					},
+					{
+						'name': 'Cancelled',
+						'value': 'cancelled',
+					},
+				],
 			},
 		],
 	},

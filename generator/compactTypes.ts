@@ -18,6 +18,7 @@ export interface IParam {
 	default?: string | number | boolean | Array<string | number | boolean>;
 	map?: string;
 	options?: Param[] | Option[];
+	placeholder?: string;
 }
 
 export type Param = IParam | string;

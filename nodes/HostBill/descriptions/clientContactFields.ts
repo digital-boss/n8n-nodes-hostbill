@@ -383,12 +383,12 @@ export const clientContactFields: INodeProperties[] = [
 		},
 	},
 	{
-		'name': 'page',
-		'displayName': 'Page',
-		'type': 'number',
-		'description': 'Which page to return',
+		'name': 'additionalFields',
+		'displayName': 'Additional Fields',
+		'type': 'collection',
 		'required': true,
-		'default': 1,
+		'default': [],
+		'placeholder': 'Add Field',
 		'displayOptions': {
 			'show': {
 				'resource': [
@@ -399,6 +399,16 @@ export const clientContactFields: INodeProperties[] = [
 				],
 			},
 		},
+		'options': [
+			{
+				'name': 'page',
+				'displayName': 'Page',
+				'type': 'number',
+				'description': 'Which page to return',
+				'required': false,
+				'default': 1,
+			},
+		],
 	},
 	{
 		'name': 'id',

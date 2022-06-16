@@ -47,14 +47,14 @@ resources:
         spec: http://api.hostbillapp.com/clients/getClients/
         responseMap: clients
         params:
-          - $ref: "#/def/fields/page"
+          - $ref: "#/def/fields/optPage"
       getDomains:
         display: Get Domains
         spec: https://api.hostbillapp.com/clients/getClientDomains/
         responseMap: domains
         params:
           - Client.id
-          - $ref: "#/def/fields/page"
+          - $ref: "#/def/fields/optPage"
       update:
         spec: http://api.hostbillapp.com/clients/setClientDetails/
         responseMap:
@@ -130,7 +130,7 @@ resources:
         responseMap: contacts
         params:
           - Client.id
-          - $ref: "#/def/fields/page"
+          - $ref: "#/def/fields/optPage"
 
       update:
         spec: http://api.hostbillapp.com/clients/setContactDetails/
@@ -254,16 +254,20 @@ resources:
         spec: https://api.hostbillapp.com/invoices/getInvoices/
         responseMap: invoices
         params:
-          - $ref: "#/def/fields/page"
-          - name: list
-            display: Status of invoices to list
-            type: options
+          - name: additionalFields
+            display: Additional Fields
+            type: collection
             options:
-              - all
-              - paid
-              - unpaid
-              - cancelled
-            default: all
+              - $ref: "#/def/fields/page"
+              - name: list
+                display: Status of invoices to list
+                type: options
+                options:
+                  - all
+                  - paid
+                  - unpaid
+                  - cancelled
+                default: all
 
   order:
     defaultOperation: getAll
@@ -372,16 +376,20 @@ resources:
         spec: http://api.hostbillapp.com/orders/getOrders/
         responseMap: orders
         params:
-          - $ref: "#/def/fields/page"
-          - name: list
-            display: Status or Orders to List
-            type: options
+          - name: additionalFields
+            display: Additional Fields
+            type: collection
             options:
-              - all
-              - active
-              - pending
-              - fraud
-              - cancelled
+              - $ref: "#/def/fields/page"
+              - name: list
+                display: Status or Orders to List
+                type: options
+                options:
+                  - all
+                  - active
+                  - pending
+                  - fraud
+                  - cancelled
 
       setStatus:
         display: Set Status
@@ -429,25 +437,29 @@ resources:
         spec: http://api.hostbillapp.com/accounts/getAccounts/
         responseMap: accounts
         params:
-          - $ref: "#/def/fields/page"
-          - name: list
-            display: Status to List
-            type: options
+          - name: additionalFields
+            display: Additional Fields
+            type: collection
             options:
-              - name: All
-                value: all
-              - name: Active
-                value: all_active
-              - name: Pending
-                value: all_pending
-              - name: Suspended
-                value: all_suspended
-              - name: Terminated
-                value: all_terminated
-              - name: Fraud
-                value: all_fraud
-              - name: Cancelled
-                value: all_cancelled
+              - $ref: "#/def/fields/page"
+              - name: list
+                display: Status to List
+                type: options
+                options:
+                  - name: All
+                    value: all
+                  - name: Active
+                    value: all_active
+                  - name: Pending
+                    value: all_pending
+                  - name: Suspended
+                    value: all_suspended
+                  - name: Terminated
+                    value: all_terminated
+                  - name: Fraud
+                    value: all_fraud
+                  - name: Cancelled
+                    value: all_cancelled
 
       update:
         spec: http://api.hostbillapp.com/accounts/editAccountDetails/
@@ -566,19 +578,23 @@ resources:
         spec: http://api.hostbillapp.com/domains/getDomains/
         responseMap: domains
         params:
-          - $ref: "#/def/fields/page"
-          - name: list
-            display: Status to List
-            type: options
+          - name: additionalFields
+            display: Additional Fields
+            type: collection
             options:
-              - all
-              - active
-              - expired
-              - pending
-              - name: Pending Transfer
-                value: pending_transfer
-              - name: Pending Registration
-                value: pending_registration
+              - $ref: "#/def/fields/page"
+              - name: list
+                display: Status to List
+                type: options
+                options:
+                  - all
+                  - active
+                  - expired
+                  - pending
+                  - name: Pending Transfer
+                    value: pending_transfer
+                  - name: Pending Registration
+                    value: pending_registration
 
 
 # Definitions.
@@ -589,6 +605,12 @@ def:
       desc: Which page to return
       type: number
       default: 1
+    optPage:
+      name: additionalFields
+      display: Additional Fields
+      type: collection
+      options:
+        - $ref: "#/def/fields/page"
     cycle:
       name: cycle
       display: Billing cycle
