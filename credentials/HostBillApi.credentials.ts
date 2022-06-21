@@ -19,7 +19,8 @@ export class HostBillApi implements ICredentialType {
 			displayName: 'HostBill Server',
 			name: 'server',
 			type: 'string',
-			default: 'http://api.hostbillapp.com',
+			default: '',
+			placeholder: 'http://api.hostbillapp.com',
 		},
 		{
 			displayName: 'HostBill API ID',
