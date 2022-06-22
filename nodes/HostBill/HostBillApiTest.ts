@@ -12,6 +12,11 @@ import {
 import { IHostBillApiCredentials } from '../../credentials/HostBillApi.credentials';
 import { normalizeHost } from './OperatonExecutor';
 
+const fail = (message: string): INodeCredentialTestResult => ({
+	status: 'Error',
+	message,
+});
+
 export async function hostBillApiTest(this: ICredentialTestFunctions, credentials: ICredentialsDecrypted): Promise<INodeCredentialTestResult> {
 	const creds = credentials.data as unknown as IHostBillApiCredentials;
 
@@ -29,17 +34,19 @@ export async function hostBillApiTest(this: ICredentialTestFunctions, credential
 		},
 	};
 
+	let response;
 	try {
-		await this.helpers.request!(options);
+		response = await this.helpers.request!(options);
 	} catch (error) {
+		return fail(`Connection failed: ${(error as JsonObject).message}`);
+	}
+
+	if (response.success === true) {
 		return {
-			status: 'Error',
-			message: `Connection details not valid: ${(error as JsonObject).message}`,
+			status: 'OK',
+			message: 'Authentication successful!',
 		};
 	}
 
-	return {
-		status: 'OK',
-		message: 'Authentication successful!',
-	};
+	return fail(`Connection failed: ${response.error}`);
 }
