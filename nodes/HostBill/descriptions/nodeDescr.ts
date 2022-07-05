@@ -2220,7 +2220,6 @@ export const nodeDescr: INode = {
 				'getAddons': {
 					'display': 'Get Addons',
 					'spec': 'http://api.hostbillapp.com/services/getAddons/',
-					'responseMap': 'addons',
 					'name': 'getAddons',
 					'path': 'services/getAddons',
 					'method': 'GET',

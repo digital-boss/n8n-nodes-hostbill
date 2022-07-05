@@ -537,7 +537,6 @@ resources:
       getAddons:
         display: Get Addons
         spec: http://api.hostbillapp.com/services/getAddons/
-        responseMap: addons
 
   domain:
     defaultOperation: getAll
