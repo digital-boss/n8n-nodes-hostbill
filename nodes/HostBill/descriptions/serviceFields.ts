@@ -25,6 +25,10 @@ export const serviceFields: INodeProperties[] = [
 				'name': 'Get Products',
 				'value': 'getProducts',
 			},
+			{
+				'name': 'Get Addons',
+				'value': 'getAddons',
+			},
 		],
 	},
 	{

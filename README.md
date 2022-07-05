@@ -48,7 +48,8 @@
   },
   "service": {
     "getProductDetails": "http://api.hostbillapp.com/services/getProductDetails/",
-    "getProducts": "http://api.hostbillapp.com/services/getProducts/"
+    "getProducts": "http://api.hostbillapp.com/services/getProducts/",
+    "getAddons": "http://api.hostbillapp.com/services/getAddons/"
   },
   "domain": {
     "register": "http://api.hostbillapp.com/domains/domainRegister/",
@@ -98,10 +99,6 @@ npm link @digital-boss/n8n-nodes-hostbill
 # Start n8n
 npx n8n
 ```
-
-# Latest functionality
-
-Displayed the package version in the node description. For reference, you can check [genversion](https://www.npmjs.com/package/genversion).
 
 # Contribution
 

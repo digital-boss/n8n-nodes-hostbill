@@ -1,27 +1,21 @@
 {
   "name": "@digital-boss/n8n-nodes-hostbill",
   "version": "0.1.2",
-  "description": "FriendGrid support for n8n.",
+  "description": "n8n Node connected with HostBill API",
   "license": "MIT",
   "homepage": "https://n8n.io",
-  "author": {
-    "name": "Valentina Lilova",
-    "email": "valentina.lilova@digital-boss.de"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/digital-boss/n8n-nodes-hostbill.git"
   },
   "keywords": [
     "n8n",
-    "nodemation",
-    "dnc",
-    "digital north consulting",
-    "digital boss",
-    "nodes",
-    "custom",
     "workflow",
-    "customer service"
+    "n8n-community-node-package",
+    "hostbill",
+    "digital boss",
+    "digital north consulting",
+    "dnc"
   ],
   "main": "index.js",
   "scripts": {
@@ -35,7 +29,9 @@
     "release": "npm run build && npm publish --access=public",
     "version": "npm run build",
     "postversion": "git push",
-    "gen": "node -r esbuild-runner/register generator/index.ts"
+    "gen:gen": "node -r esbuild-runner/register generator/index.ts",
+    "gen:fix": "tslint --fix -p tsconfig.json -c tslint.json nodes/HostBill/descriptions/*.ts",
+    "gen": "npm run gen:gen && npm run gen:fix"
   },
   "files": [
     "dist"
