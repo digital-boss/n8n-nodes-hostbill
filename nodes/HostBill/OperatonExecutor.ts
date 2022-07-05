@@ -22,10 +22,10 @@ type Dict<T> = {[key: string]: T};
 
 export const normalizeHost = (hostName: string) => hostName.replace(/\/$/, '');
 
-const pick = (obj: any, props: string[]) => props.reduce((acc, i) => {
+const pick = (obj: IDataObject, props: string[]) => props.reduce((acc, i) => {
 	acc[i] = obj[i];
 	return acc;
-}, {} as any);
+}, {} as IDataObject);
 
 export class OperationExecutor {
 	private indexItem = 0;
