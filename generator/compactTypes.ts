@@ -25,7 +25,7 @@ export type Param = IParam | string;
 
 export interface IOperation {
 	spec: string;
-	params: Param[];
+	params?: Param[];
 	name?: string;
 	display?: string;
 	desc?: string;

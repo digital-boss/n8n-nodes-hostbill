@@ -94,7 +94,7 @@ export class OperationExecutor {
 			throw new NodeOperationError(this.execFns.getNode(), `Invalid param type '${collectionParam.type}'. Expected collection.`);
 		}
 
-		const params = this.operation.params as IParam[];
+		const params = (this.operation.params || []) as IParam[];
 		// tslint:disable-next-line: no-any
 		const dict = this.getParamValue(collectionParam) as {[key: string]: any};
 
@@ -115,7 +115,7 @@ export class OperationExecutor {
 
 	// tslint:disable-next-line: no-any
 	getParams = (): Dict<any> => {
-		const params = this.operation.params as IParam[];
+		const params = (this.operation.params || []) as IParam[];
 
 		const primaryParams = params.filter(i => i.type !== 'collection');
 		const collectParams = params.filter(i => i.type === 'collection');

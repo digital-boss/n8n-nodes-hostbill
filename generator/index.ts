@@ -213,7 +213,7 @@ const mapOperation = (op: IOperation, node: INode, key: string): IOperation => {
 		display: op.display ? op.display : cap1st(key),
 		path: getPathFromSpec(op.spec),
 		method: 'GET',
-		params: mapArr(op.params, node, [mapParamRec]),
+		params: mapArr(op.params || [], node, [mapParamRec]),
 	};
 };
 
