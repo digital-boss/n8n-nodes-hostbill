@@ -100,10 +100,6 @@ npm link @digital-boss/n8n-nodes-hostbill
 npx n8n
 ```
 
-# Latest functionality
-
-Displayed the package version in the node description. For reference, you can check [genversion](https://www.npmjs.com/package/genversion).
-
 # Contribution
 
 To make this node even better, please let us know, [how you use it](mailto:info@digital-north-consulting.com). Commits are always welcome.
