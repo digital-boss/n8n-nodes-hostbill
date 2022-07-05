@@ -7,7 +7,7 @@ import { INode, IOperation, IOperations, IOption, IParam, IResources } from './c
 
 const getResourcesParam = (res: IResources): INodeProperties => {
 	const options: INodePropertyOptions[] = Object.keys(res).map(name => ({
-		name: res[name].display,
+		name: res[name].display!,
 		value: name,
 	}));
 
@@ -25,8 +25,8 @@ const getOperationsParam = (ops: IOperations, defaultOp: string, resourceName: s
 	const options: INodePropertyOptions[] = Object.keys(ops).map(name => {
 		const op = ops[name];
 		return {
-			name: op.display,
-			value: op.name,
+			name: op.display!,
+			value: op.name!,
 			description: op.desc,
 		};
 	});
@@ -48,7 +48,7 @@ const getOperationsParam = (ops: IOperations, defaultOp: string, resourceName: s
 
 const mapOption = (opt: IOption): INodePropertyOptions => {
 	return {
-		name: opt.name,
+		name: opt.name!,
 		value: opt.value,
 		description: opt.desc,
 	};
@@ -57,8 +57,8 @@ const mapOption = (opt: IOption): INodePropertyOptions => {
 const mapParam = (param: IParam, display?: [res: string, op: string]): INodeProperties  => {
 	const result: INodeProperties = {
 		name: param.name,
-		displayName: param.display,
-		type: param.type,
+		displayName: param.display!,
+		type: param.type!,
 		description: param.desc,
 		required: param.required,
 		default: param.default,
