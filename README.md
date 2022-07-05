@@ -48,7 +48,8 @@
   },
   "service": {
     "getProductDetails": "http://api.hostbillapp.com/services/getProductDetails/",
-    "getProducts": "http://api.hostbillapp.com/services/getProducts/"
+    "getProducts": "http://api.hostbillapp.com/services/getProducts/",
+    "getAddons": "http://api.hostbillapp.com/services/getAddons/"
   },
   "domain": {
     "register": "http://api.hostbillapp.com/domains/domainRegister/",
