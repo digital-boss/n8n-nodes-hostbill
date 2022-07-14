@@ -77,7 +77,7 @@ export class OperationExecutor {
 		return value;
 	}
 
-	formatPrivileges = (dict: Dict<number>): any => {
+	formatPrivileges = (dict: Dict<number>): IDataObject => {
 		return Object.keys(dict).reduce((acc, item) => {
 			const [category, priv] = item.split('_');
 			acc[category] = acc[category] ? acc[category] : {};
@@ -86,13 +86,13 @@ export class OperationExecutor {
 		}, {} as any);
 	}
 
-	getCollectionParams = (collectionParam: IParam): Array<[string, any?]> => {
+	getCollectionParams = (collectionParam: IParam): Array<[string, string | IDataObject | undefined]> => {
 		if (collectionParam.type !== 'collection') {
 			throw new NodeOperationError(this.execFns.getNode(), `Invalid param type '${collectionParam.type}'. Expected collection.`);
 		}
 
 		const params = (this.operation.params || []) as IParam[];
-		const dict = this.getParamValue(collectionParam) as {[key: string]: any};
+		const dict = this.getParamValue(collectionParam) as Record<string, any>;
 
 		if (collectionParam.name === 'privileges') {
 			return [[collectionParam.name, this.formatPrivileges(dict)]];
@@ -103,20 +103,20 @@ export class OperationExecutor {
 				const mappedValue = p && p.map
 					? this.mapValue(p.map, key)
 					: value as string;
-				const result: [string, string?] = [key, mappedValue];
+				const result: [string, string | undefined] = [key, mappedValue];
 				return result;
 			});
 		}
 	}
 
-	getParams = (): Dict<any> => {
+	getParams = (): Record<string, string | IDataObject | undefined> => {
 		const params = (this.operation.params || []) as IParam[];
 
 		const primaryParams = params.filter(i => i.type !== 'collection');
 		const collectParams = params.filter(i => i.type === 'collection');
 
 		const primaryValues: Array<[string, string?]> = primaryParams.map(p => [p.name, this.getParamValue(p)]);
-		const collectionsValues: Array<[string, any?]> = collectParams.map(this.getCollectionParams).flat();
+		const collectionsValues: Array<[string, string | IDataObject | undefined]> = collectParams.map(this.getCollectionParams).flat();
 
 		return Array.prototype
 			.concat(primaryValues, collectionsValues)
@@ -124,10 +124,10 @@ export class OperationExecutor {
 			.reduce((acc, [key, value]) => {
 				acc[key] = value;
 				return acc;
-			}, {} as Dict<string>);
+			}, {} as Record<string, string>);
 	}
 
-	protected buildRequest = (params: Dict<string>, call: string): OptionsWithUri => {
+	protected buildRequest = (params: Record<string, string | IDataObject | undefined>, call: string): OptionsWithUri => {
 		const credParams: Dict<string> = {
 			'api_id': this.credentials.apiId,
 			'api_key': this.credentials.apiKey,

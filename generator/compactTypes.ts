@@ -1,4 +1,4 @@
-import { NodePropertyTypes } from 'n8n-workflow';
+import { IDataObject, NodePropertyTypes } from 'n8n-workflow';
 
 export type Option = IOption | string;
 
@@ -47,7 +47,6 @@ export interface IResources { [name: string]: IResource; }
 
 export interface INode {
 	resources: IResources;
-	// tslint:disable-next-line: no-any
-	def: { [key: string]: any };
-	models: { [name: string]: IParam[] };
+	def: Record<string, IDataObject>;
+	models: Record<string, IParam[]>;
 }
