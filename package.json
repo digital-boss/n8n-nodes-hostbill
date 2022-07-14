@@ -29,9 +29,9 @@
     "release": "npm run build && npm publish --access=public",
     "version": "npm run build",
     "postversion": "git push",
-    "gen:gen": "node -r esbuild-runner/register generator/index.ts",
+    "gen:run": "node -r esbuild-runner/register generator/index.ts",
     "gen:fix": "tslint --fix -p tsconfig.json -c tslint.json nodes/HostBill/descriptions/*.ts",
-    "gen": "npm run gen:gen && npm run gen:fix"
+    "gen": "npm run gen:run && npm run gen:fix"
   },
   "files": [
     "dist"
