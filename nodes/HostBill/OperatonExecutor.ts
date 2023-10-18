@@ -20,7 +20,7 @@ export type Mappers = {[mapper: string]: (value: any) => string | undefined};
 
 type Dict<T> = {[key: string]: T};
 
-export const normalizeHost = (hostName: string) => hostName.replace(/\/$/, '');
+export const normalizeHost = (hostName: string) => hostName.replace(/\/$/, '').replace('/api.php', '');
 
 const pick = (obj: IDataObject, props: string[]) => props.reduce((acc, i) => {
 	acc[i] = obj[i];
@@ -138,7 +138,7 @@ export class OperationExecutor {
 				'Content-Type': 'application/json',
 			},
 			method: 'GET',
-			uri: normalizeHost(this.credentials.server) + '/admin/api.php',
+			uri: normalizeHost(this.credentials.server) + (this.credentials.server.match(/\/.+\/.+$/gm) ? '' : '/admin') + '/api.php',
 			json: true,
 			qs: Object.assign(credParams, params),
 		};

@@ -83,7 +83,7 @@ const mapParam = (param: IParam, display?: [res: string, op: string]): INodeProp
 };
 
 const getParams = (op: IOperation, resourceName: string): INodeProperties[] => {
-	return (op.params as IParam[]).map(p => mapParam(p, [resourceName, op.name]));
+	return (op.params as IParam[]).map(p => mapParam(p, [resourceName, op.name || '']));
 };
 
 export type DescriptionsDict = {[key: string]: INodeProperties | INodeProperties[]};
